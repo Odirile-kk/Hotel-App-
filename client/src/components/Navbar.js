@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import SignUp from "../Pages/SignUp";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -12,13 +14,20 @@ const Navbar = () => {
     setIsModalOpen(false);
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div>
-      <nav class="navbar">
-        <a class="navbar-brand" href="#">
-          Your Logo
-        </a>
-        <ul class="navbar-nav">
+      <nav className={`navbar ${isMenuOpen ? 'open' : ''}`}>
+        <div className="navbar-brand">
+          <Link to='/'>Your Logo</Link>
+        </div>
+        <button className="hamburger" onClick={toggleMenu}>
+          ☰
+        </button>
+        <ul className={`navbar-nav ${isMenuOpen ? 'open' : ''}`}>
           <li>
             <a href="#about">About</a>
           </li>

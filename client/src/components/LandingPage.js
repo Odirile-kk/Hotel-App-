@@ -7,6 +7,7 @@ import About from "../Pages/About";
 import Amenities from "../Pages/Amenities";
 import Rooms from "../Pages/Rooms";
 import {BsFacebook, BsTwitter, BsInstagram} from 'react-icons/bs'
+import contact from '../assets/pexels-thorsten-technoman-338504.jpg'
 
 const LandingPage = () => {
   return (
@@ -20,7 +21,7 @@ const LandingPage = () => {
       {/*Header */}
       <section className="home" id="home">
         <div class="btn-container">
-          <button className="link-btn">Book Now</button>
+          <button className="link-btn"><a href="#rooms">Book Now</a></button>
         </div>
       </section>
 
@@ -42,14 +43,15 @@ const LandingPage = () => {
 
       {/*Contact */}
       <section className="contact" id="contact">
-        <h1>Get in touch</h1>
+      
 
-        <div class="contact-container">
+      
           <div class="contact-image">
-            <img src={pic} alt="Image" />
+            <img src={contact} alt="Image" />
           </div>
 
           <div class="form">
+          <h1>Contact Us</h1>
             <form class="text-center border border-light p-5" action="#!">
               <input
                 type="text"
@@ -78,7 +80,7 @@ const LandingPage = () => {
               </button>
             </form>
           </div>
-        </div>
+      
       </section>
 
       {/*Footer */}
@@ -113,13 +115,13 @@ const LandingPage = () => {
               <Link to='/terms'>Terms of service</Link>
               <div className="social-icons">
                 <a href="#">
-                  <BsFacebook size={40}/>
+                  <BsFacebook size={40} color="white"/>
                 </a>
                 <a href="#">
-                  <BsTwitter size={40}/>
+                  <BsTwitter size={40} color="white"/>
                 </a>
                 <a href="#">
-                  <BsInstagram size={40}/>
+                  <BsInstagram size={40} color="white"/>
                 </a>
                
               </div>

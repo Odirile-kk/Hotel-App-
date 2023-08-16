@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import bookPic from "../assets/pexels-kindel-media-7294584.jpg";
 import venice1 from "../assets/venice-hotel-1.jpg";
 import venice2 from "../assets/venice-hotel-2.jpg";
@@ -6,8 +6,8 @@ import venice3 from "../assets/venice-hotel-3.jpg";
 import venice4 from "../assets/venice-hotel-4.jpg";
 import "react-datepicker/dist/react-datepicker.css";
 import { MdCalendarMonth } from "react-icons/md";
-import {AiOutlineUser} from 'react-icons/ai'
-import { BsCheck } from "react-icons/bs";
+import { AiOutlineUser } from "react-icons/ai";
+import { BsCheck, BsPersonFill } from "react-icons/bs";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
@@ -15,6 +15,10 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { format } from "date-fns";
 import Navbar from "../components/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { fetchRooms } from "../Redux/roomSlice";
+import { postBookingOptions } from '../Redux/bookSlice';
 
 const Book = () => {
   const [date, setDate] = useState([
@@ -26,11 +30,50 @@ const Book = () => {
   ]);
   const [openDate, setOpenDate] = useState(false);
   const [openOptions, setOpenOptions] = useState(false);
+
   const [options, setOptions] = useState({
     adults: 2,
     children: 0,
     rooms: 1,
   });
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const { rooms, loading, error } = useSelector((state) => state.rooms);
+  // Find the specific room with the provided ID
+  const room = rooms.find((room) => room._id === id);
+
+  const [bookingOptions, setBookingOptions] = useState({
+    startDate: "",
+    endDate:"",
+    adults: "",
+    children:"",
+    rooms: "",
+  });
+
+  useEffect(() => {
+    dispatch(fetchRooms()); // Fetch all rooms if needed
+  }, [dispatch]);
+
+
+
+  const handleBookClick = () => {
+    const selectedStartDate = date[0].startDate;
+    const selectedEndDate = date[0].endDate;
+  
+    const updatedBookingOptions = {
+      startDate: selectedStartDate,
+      endDate: selectedEndDate,
+      adults: options.adults,
+      children: options.children,
+      rooms: options.rooms,
+    };
+  
+    setBookingOptions(updatedBookingOptions); // Update local state
+    dispatch(postBookingOptions(updatedBookingOptions)); // Dispatch the action
+  };
+    
+  
+
 
   const handleOption = (name, operation) => {
     setOptions((prev) => {
@@ -40,6 +83,18 @@ const Book = () => {
       };
     });
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!room) {
+    return <div>Room not found</div>;
+  }
 
   return (
     <>
@@ -65,17 +120,9 @@ const Book = () => {
               </div>
             </Carousel>
             <div className="book-text">
-              <h1>De Luxe Suite</h1>
-              <p className="book-details">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                pellentesque nulla sit amet ornare consectetur. Sed et tempus
-                dolor. Nulla dictum scelerisque mattis. Sed scelerisque a eros
-                ut sollicitudin. Aliquam ligula arcu, vestibulum at tincidunt
-                quis, ornare vel ex. Suspendisse sollicitudin est id est ornare,
-                et bibendum lectus elementum. Nam aliquam dui nulla, eget
-                condimentum lacus finibus ornare. Sed facilisis turpis facilisis
-                suscipit cursus.
-              </p>
+              <h1>{room.title}</h1>
+              <h4>R {room.price} / night <BsPersonFill/>{room.maxPeople}</h4>
+              <p className="book-details">{room.desc}</p>
             </div>
           </div>
         </div>
@@ -119,6 +166,7 @@ const Book = () => {
                 {`${format(date[0].startDate, "MM/dd/yyyy")} 
     to ${format(date[0].endDate, "MM/dd/yyyy")}`}
               </span>
+
               {openDate && (
                 <DateRange
                   editableDateInputs={true}
@@ -211,9 +259,10 @@ const Book = () => {
                 </div>
               )}
             </div>
-            {/* 
-<button className="book-btn">Book</button> */}
+
+            <button className="book-btn" onClick={handleBookClick}>Book</button>
           </div>
+          
         </div>
       </div>
     </>
