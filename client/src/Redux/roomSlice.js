@@ -20,24 +20,24 @@ export const fetchRoom = createAsyncThunk('room/fetchRoom', async (id , { reject
   
   
     try {
-        const response = await axios.delete(`http://localhost:3000/api/rooms/${id }`);
+        const response = await axios.delete(`http://localhost:3000/api/rooms/${id}`);
         return response.data;
       } catch (error) {
         return rejectWithValue('Failed to fetch room.');
       }
     });
 
-  // Async thunk for fetching all rooms
   export const fetchRooms = createAsyncThunk('room/fetchRooms', async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get('http://localhost:3000/api/rooms/');
       return response.data;
+   
     } catch (error) {
       return rejectWithValue('Failed to fetch rooms.');
     }
   });
 
-  export const createRoom = createAsyncThunk('booking/postBookingOptions',async (data) => {
+  export const createRoom = createAsyncThunk('room/createRoom',async (data) => {
     try {
       const response = await axios.post('http://localhost:3000/api/rooms/', data);
       return response.data;
@@ -45,6 +45,16 @@ export const fetchRoom = createAsyncThunk('room/fetchRoom', async (id , { reject
       throw error;
     }
   }
+);
+
+export const updateRoom = createAsyncThunk('room/updateRoom',async (data) => {
+  try {
+    const response = await axios.put(`http://localhost:3000/api/rooms/${data.id}`, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
 );
 
 
@@ -59,11 +69,11 @@ const roomSlice = createSlice({
     },
     reducers: {
       addRoom: (state, action) => {
-        state.push(action.payload);
+        state.rooms = [...state.rooms, action.payload];
       },
       deleteRoomById: (state, action) => {
         const roomIdToDelete = action.payload;
-        return state.filter(room => room.id !== roomIdToDelete);
+        return state.rooms.filter(room => room.id !== roomIdToDelete);
       },
       findRoomById: (state, action) => {
         const { roomId } = action.payload;

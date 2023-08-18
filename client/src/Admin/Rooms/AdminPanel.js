@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRooms, fetchRoom, deleteRoomById} from "../Redux/roomSlice";
-import Sidebar from "./Sidebar";
+import { fetchRooms, deleteRoom} from "../../Redux/roomSlice";
+import Sidebar from "../Sidebar";
 
 const AdminPanel = () => {
   const dispatch = useDispatch();
@@ -10,31 +10,33 @@ const AdminPanel = () => {
 
   useEffect(() => {
     dispatch(fetchRooms());
-  });
+    // console.log('lets count')
+  }, []);
 
-  const handleDelete = () => {
-    dispatch(deleteRoomById)
+  const handleDelete = async (id) => {
+    dispatch(deleteRoom(id))
+    dispatch(fetchRooms())
   }
 
   return (
     <>
-      <div class="d-flex" id="wrapper">
+      <div className="d-flex" id="wrapper">
         <div>
           <Sidebar />
         </div>
 
         <div id="page-content-wrapper" style={{}}>
-          <div class="container-fluid px-4" style={{ marginTop: "13%" }}>
-            <div class="row my-5">
-              <h3 class="fs-4 mb-3">Rooms</h3>
+          <div className="container-fluid px-4" style={{ marginTop: '13%', marginLeft: "4%"}}>
+            <div className="row my-5">
+              <h3 className="fs-4 mb-3">Rooms</h3>
               <Link to={"/addRooms"}>
                 <button>Add Room</button>
               </Link>
               <div
-                class="col"
+                className="col"
                 style={{ boxShadow: "2px 2px 10px 0 rgba(22, 22, 26, 0.22)" }}
               >
-                <table class="table bg-white rounded shadow-sm  table-hover">
+                <table className="table bg-white rounded shadow-sm  table-hover">
                   <thead>
                     <tr>
                       <th scope="col" width="50">
@@ -49,16 +51,16 @@ const AdminPanel = () => {
                   </thead>
                   <tbody>
                     {rooms.map((room) => (
-                      <tr>
+                      <tr key={room._id}>
                         <th scope="row">{room._id}</th>
                         <td>{room.roomNumber}</td>
                         <td>{room.title}</td>
                         <td>{room.price}</td>
                         <td>{room.desc}</td>
                         <td>
-                          <button>Update</button>
+                          <button><Link to={`/adminUpdate/${room._id}`}>Update</Link></button>
                           <br />
-                          <button onClick={handleDelete}>Delete</button>
+                          <button onClick={e => handleDelete(room._id)} class="btn btn-danger">Delete</button>
                         </td>
                       </tr>
                     ))}

@@ -12,7 +12,7 @@ router.post("/",  makeBooking);
 
 router.put("/:id", updateBooking);
 //DELETE
-router.delete("/:id/:bookid", deleteBooking);
+router.delete("/:id", deleteBooking);
 //GET
 
 router.get("/:id", getBooking);
