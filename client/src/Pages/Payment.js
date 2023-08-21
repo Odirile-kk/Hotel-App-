@@ -10,7 +10,7 @@ const Payment = ({route}) => {
 
   const data = {
     email: "emkayphozur@gmail.com",
-    amount: totalPrice,
+    amount: totalPrice * 100,
   };
 
 
@@ -67,7 +67,7 @@ const Payment = ({route}) => {
               <div className="form-row">
                 <div className="form-group required">
                   <label className="control-label">Name</label>
-                  <input className="form-control" size="4" type="text" />
+                  <input className="form-control" size="4" type="text" required='required'/>
                 </div>
               </div>
 

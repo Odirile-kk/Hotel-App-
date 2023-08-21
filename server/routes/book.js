@@ -11,6 +11,7 @@ router.post("/",  makeBooking);
 //UPDATE
 
 router.put("/:id", updateBooking);
+
 //DELETE
 router.delete("/:id", deleteBooking);
 //GET

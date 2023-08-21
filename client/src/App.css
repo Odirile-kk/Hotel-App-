@@ -17,6 +17,7 @@ section {
 }
 
 .navbar-container {
+  order: 1;
   .navbar {
     /* Navbar background color */
     position: fixed;

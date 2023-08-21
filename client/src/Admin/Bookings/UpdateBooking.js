@@ -30,6 +30,7 @@ const { id } = useParams();
                 rooms: booking.rooms || ""
             });
         }
+        console.log(booking)
     }, [booking]);
 
   const [input, setInput] = useState({
@@ -51,26 +52,29 @@ const { id } = useParams();
   ]);
 
   const handleSubmit = async () => {
-    const selectedStartDate = date[0].startDate;
-    const selectedEndDate = date[0].endDate;
+    console.log('this id is from useparams', id)
+    try {
+      const selectedStartDate = date[0].startDate;
+      const selectedEndDate = date[0].endDate;
   
-    const updatedBookingOptions = {
-
-      name: input.name,
-      email: input.email,
-      startDate: selectedStartDate,
-      endDate: selectedEndDate,
-      adults: input.adults,
-      children: input.children,
-      rooms: input.rooms,
-
-    };
+      const updatedBookingOptions = {
+        name: input.name,
+        email: input.email,
+        startDate: selectedStartDate,
+        endDate: selectedEndDate,
+        adults: input.adults,
+        children: input.children,
+        rooms: input.rooms,
+      };
   
-    setInput(updatedBookingOptions); 
-    dispatch(updateBooking(id, updatedBookingOptions)); 
-  console.log('this is my id', id, updatedBookingOptions)
-  }
-
+      setInput(input, date);
+      await dispatch(updateBooking({id, ...updatedBookingOptions }));
+      console.log('this is my id', id, input, date);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
+  
 
   return (
     <div>
