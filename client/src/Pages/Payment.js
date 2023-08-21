@@ -1,9 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
+import axios from "axios";
+import { useLocation } from 'react-router-dom';
 
-const Payment = () => {
+const Payment = ({route}) => {
+  const [payment, setPayment] = useState(null);
+  const location = useLocation();
+  const { totalPrice } = location.state;
 
-  
+  const data = {
+    email: "emkayphozur@gmail.com",
+    amount: totalPrice,
+  };
+
+
+
+  const postPaymentData = async (e) => {
+    e.preventDefault();
+    console.log("this is the total price", totalPrice);
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/payment/initiate-payment",
+        data
+      );
+      console.log("we posted", response);
+      setPayment(response);
+      console.log("this is resdata", response.data.data.authorization_url);
+
+        const authorizationURL = response.data.data.authorization_url;
+        window.location.href = authorizationURL;
+      
+       
+    } catch (error) {
+      console.log("Payment initiation error:", error);
+    }
+  };
+
   return (
     <>
       <div className="navbar-container">
@@ -25,7 +57,7 @@ const Payment = () => {
                 <i>BALANCE DUE:</i>
               </h2>
             </div>
-            <div className="paymentAmt">$100</div>
+            <div className="paymentAmt">R {totalPrice}</div>
           </div>
         </div>
 
@@ -77,6 +109,7 @@ const Payment = () => {
                   <button
                     className="form-control btn btn-primary"
                     type="submit"
+                    onClick={postPaymentData}
                   >
                     Continue →
                   </button>

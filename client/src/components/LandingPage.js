@@ -10,6 +10,12 @@ import {BsFacebook, BsTwitter, BsInstagram} from 'react-icons/bs'
 import contact from '../assets/pexels-thorsten-technoman-338504.jpg'
 
 const LandingPage = () => {
+
+const handleSubmit = () => {
+  alert('Thank you for contacting us. We will respond shortly')
+  window.location.reload()
+}
+
   return (
     <div>
       {/*Navbar */}
@@ -75,7 +81,7 @@ const LandingPage = () => {
                 ></textarea>
               </div>
 
-              <button class="btn btn-info btn-block" type="submit">
+              <button class="btn btn-info btn-block" type="submit" onClick={handleSubmit}>
                 Send
               </button>
             </form>

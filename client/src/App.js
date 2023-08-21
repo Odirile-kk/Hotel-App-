@@ -45,7 +45,8 @@ function App () {
         {/*Admin panel for users */}
         <Route path="/adminuser" element={<AdminUsers />}></Route>
         <Route path="/adduser" element={<AddUser />}></Route>
-        <Route path="/updateuser/:id" element={<UpdateUser />}></Route>
+
+        <Route path="/updateuser/:id" element={<UpdateUser />}/>
       </Routes>
     </BrowserRouter>
   );
