@@ -66,8 +66,8 @@ const { id } = useParams();
 
     };
   
-    setInput(updatedBookingOptions); // Update local state
-    dispatch(updateBooking(id, updatedBookingOptions)); // Dispatch the action
+    setInput(updatedBookingOptions); 
+    dispatch(updateBooking(id, updatedBookingOptions)); 
   console.log('this is my id', id, updatedBookingOptions)
   }
 

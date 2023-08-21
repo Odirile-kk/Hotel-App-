@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+
+
 const UserSchema = new mongoose.Schema(
   {
     username: {
@@ -11,10 +13,17 @@ const UserSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-   
+    name: {
+      type: String,
+    },
+    surname: {
+      type: String,
+    },
     password: {
       type: String,
-      required: true,
+    },
+    number: {
+      type: String,
     },
     isAdmin: {
       type: Boolean,

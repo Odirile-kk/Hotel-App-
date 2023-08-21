@@ -16,7 +16,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { format } from "date-fns";
 import Navbar from "../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { fetchRooms } from "../Redux/roomSlice";
 import { postBookingOptions } from '../Redux/bookSlice';
 
@@ -68,8 +68,9 @@ const Book = () => {
       rooms: options.rooms,
     };
   
-    setBookingOptions(updatedBookingOptions); // Update local state
-    dispatch(postBookingOptions(updatedBookingOptions)); // Dispatch the action
+    setBookingOptions(updatedBookingOptions); 
+    dispatch(postBookingOptions(updatedBookingOptions)); 
+    console.log("book clicked");
   };
     
   
@@ -107,16 +108,16 @@ const Book = () => {
           <div className="book-img">
             <Carousel>
               <div>
-                <img src={venice1} alt="Image 1" />
+                <img src={room.image} alt="Image 1" />
               </div>
               <div>
-                <img src={venice2} alt="Image 2" />
+                <img src={room.image2} alt="Image 2" />
               </div>
               <div>
-                <img src={venice3} alt="Image 3" />
+                <img src={room.image3} alt="Image 3" />
               </div>
               <div>
-                <img src={venice4} alt="Image 4" />
+                <img src={room.image4} alt="Image 4" />
               </div>
             </Carousel>
             <div className="book-text">
@@ -130,29 +131,13 @@ const Book = () => {
         <div className="utils-container">
           <div className="utils">
             <div className="utils-left">
-              <h6>Kitchen </h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
+           <h6>{room.util} </h6>
+              
+              
             </div>
             <div className="utils-right">
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
-              <h6>Kitchen</h6>
+            <h6><BsCheck/>{room.util2}</h6>
+             
             </div>
           </div>
 
@@ -260,9 +245,9 @@ const Book = () => {
               )}
             </div>
 
-            <button className="book-btn" onClick={handleBookClick}>Book</button>
-          </div>
           
+          </div>
+          <button className="book-btn" onClick={handleBookClick}><Link to={"/payment"} style={{color: 'white'}}>Book</Link></button>
         </div>
       </div>
     </>

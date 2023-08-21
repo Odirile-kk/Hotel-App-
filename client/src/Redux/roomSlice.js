@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 
-// Async thunk for fetching a single room
+//fetching a single room
 export const fetchRoom = createAsyncThunk('room/fetchRoom', async (id , { rejectWithValue }) => {
   
   
@@ -27,6 +27,7 @@ export const fetchRoom = createAsyncThunk('room/fetchRoom', async (id , { reject
       }
     });
 
+    //fetch al rooms
   export const fetchRooms = createAsyncThunk('room/fetchRooms', async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get('http://localhost:3000/api/rooms/');

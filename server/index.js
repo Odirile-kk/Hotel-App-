@@ -8,6 +8,7 @@ import roomsRoute from "./routes/room.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import bodyParser from "body-parser"
+import paymentRoute from "./routes/payment.js"
 
 const app = express()
 
@@ -23,6 +24,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/rooms", roomsRoute);
 app.use("/api/book", bookRoute);
+app.use("/api/payment", paymentRoute);
 
 app.use((err, req, res, next) => {
     const errorStatus = err.status || 500;
