@@ -12,7 +12,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const AddBooking = () => {
 const dispatch = useDispatch()
-const nav = useNavigate()
+
 
 const { id } = useParams();
     const { book } = useSelector((state) => state.book);

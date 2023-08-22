@@ -32,7 +32,7 @@ const AdminBooking = () => {
             <div id="page-content-wrapper" style={{}}>
 
 
-                <div className="container-fluid px-4" style={{ marginTop: '13%', marginLeft: "4%" }}>
+                <div className="container-fluid px-4" style={{ marginTop: '10%' }}>
                     <button><Link to={'/addbooking'}>Make a booking</Link></button>
 
                     <div className="row my-5">
@@ -41,7 +41,7 @@ const AdminBooking = () => {
                             <table className="table bg-white rounded shadow-sm  table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col" width="50">#</th>
+                                        <th scope="col" >#</th>
                                         <th scope="col">Username</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Check-in</th>

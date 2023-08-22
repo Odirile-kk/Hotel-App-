@@ -22,7 +22,7 @@ function App () {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<AdminPanel />}></Route>
+        <Route path="/" element={<LandingPage />}></Route>
         <Route path="/room/:id" element={<Book />}></Route>
         <Route path="/gallery" element={<Gallery />}></Route>
         <Route path="/terms" element={<Terms />}></Route>
@@ -31,7 +31,7 @@ function App () {
         <Route path="/payment" element={<Payment />}></Route>
 
         {/*Admin panel for rooms */}
-        {/* <Route path="/adminpanel" element={<AdminPanel />}></Route> */}
+        <Route path="/adminpanel" element={<AdminPanel />}></Route>
         <Route path="/addrooms" element={<AddRooms />}></Route>
         <Route path="/adminUsers" element={<AdminUsers />}></Route>
         <Route path="/adminBookings" element={<AdminBooking />}></Route>
@@ -45,7 +45,6 @@ function App () {
         {/*Admin panel for users */}
         <Route path="/adminuser" element={<AdminUsers />}></Route>
         <Route path="/adduser" element={<AddUser />}></Route>
-
         <Route path="/updateuser/:id" element={<UpdateUser />}/>
       </Routes>
     </BrowserRouter>

@@ -7,7 +7,7 @@ import bookReducer from "../src/Redux/bookSlice";
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    user: userReducer,
+    users: userReducer,
     rooms: roomReducer,
     book: bookReducer
   },

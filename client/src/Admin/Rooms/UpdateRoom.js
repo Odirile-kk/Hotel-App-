@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { updateRoom, fetchRooms } from '../../Redux/roomSlice'
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
 
 const AddRooms = () => {
     const dispatch = useDispatch()
-    const nav = useNavigate()
     const { id } = useParams();
     const { rooms } = useSelector((state) => state.rooms);
 

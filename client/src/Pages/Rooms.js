@@ -31,7 +31,7 @@ const Rooms = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
-        <button onClick={() => handleScroll("left")}>Scroll Left</button>
+        {/* <button onClick={() => handleScroll("left")}></button> */}
       <div class="cards-wrapper">
       
         {rooms.map((room) => (
@@ -57,7 +57,7 @@ const Rooms = () => {
         ))}
        
       </div>
-      <button  style={{ order: 1 }} onClick={() => handleScroll("right")}>Scroll Right</button>
+      {/* <button  style={{ order: 1 }} onClick={() => handleScroll("right")}></button> */}
      
     </div>
   );
