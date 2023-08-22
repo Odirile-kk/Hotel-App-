@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SignUp from "../Pages/SignUp";
 import { Link } from "react-router-dom";
+import logo from '../../src/assets/deluxesmall.png'
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,7 +23,7 @@ const Navbar = () => {
     <div>
       <nav className={`navbar ${isMenuOpen ? 'open' : ''}`}>
         <div className="navbar-brand">
-          <Link to='/'>Your Logo</Link>
+          <Link to='/'><img src={logo} alt='' width={180} height={180} style={{marginTop: -50}}/></Link>
         </div>
         <button className="hamburger" onClick={toggleMenu}>
           ☰
@@ -65,3 +66,32 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

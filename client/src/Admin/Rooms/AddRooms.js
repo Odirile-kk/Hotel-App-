@@ -29,15 +29,23 @@ const nav = useNavigate()
 
 
   return (
-    <div>
-      <form>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      marginTop: '10%',
+    
+
+    }}>
+    
+      <form style={{
+        width: '40%'
+      }}>
         <div className="form-group">
           <label htmlFor="formGroupExampleInput">Title</label>
           <input
             type="text"
             className="form-control"
-            id="formGroupExampleInput"
-            placeholder="Example input"
+           
             onChange={e => setInput({ ...input, title: e.target.value })}
           />
         </div>
@@ -47,8 +55,7 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-            id="formGroupExampleInput2"
-            placeholder="Another input"
+           
             onChange={e => setInput({ ...input, price: e.target.value })}
           />
         </div>
@@ -57,8 +64,7 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-            id="formGroupExampleInput2"
-            placeholder="Another input"
+          
             onChange={e => setInput({ ...input, maxPeople: e.target.value })}
           />
         </div>
@@ -67,8 +73,7 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-            id="formGroupExampleInput2"
-            placeholder="Another input"
+           
             onChange={e => setInput({ ...input, desc: e.target.value })}
           />
         </div>
@@ -77,13 +82,12 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-            id="formGroupExampleInput2"
-            placeholder="Another input"
+        
             onChange={e => setInput({ ...input, roomNumber: e.target.value })}
           />
         </div>
 
-        <button onClick={handleSubmit}><Link to={'/'}>Submit</Link></button>
+        <button style={{marginLeft: '40%', padding: '2%', borderRadius: '10px', backgroundColor: 'blue', marginTop: '5%'}} onClick={handleSubmit}><Link to={'/'} style={{textDecoration: 'none', color: 'white'}}>Submit</Link></button>
       </form>
     </div>
   );

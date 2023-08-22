@@ -10,7 +10,7 @@ const Sidebar = () => {
         </div>
 
         <div className="list-group list-group-flush my-3" style={{padding: '10%', paddingTop:'30%'}}>
-          <Link to='/'
+          <Link to='/adminpanel'
         
             className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
           >

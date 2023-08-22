@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import abtPic from "../assets/pexels-kindel-media-7294585.jpg";
-import pic from "../assets/pexels-kindel-media-7294584.jpg";
+import deluxe from "../assets/Deluxe.png";
 import Navbar from "./Navbar";
 import About from "../Pages/About";
 import Amenities from "../Pages/Amenities";
@@ -16,6 +16,12 @@ const handleSubmit = () => {
   window.location.reload()
 }
 
+const [fadeIn, setFadeIn] = useState(false);
+
+useEffect(() => {
+  setFadeIn(true);
+}, []);
+
   return (
     <div>
       {/*Navbar */}
@@ -26,7 +32,12 @@ const handleSubmit = () => {
 
       {/*Header */}
       <section className="home" id="home">
+      <div className={`logo ${fadeIn ? 'fade-in' : ''}`}>
+      <img src={deluxe} alt='' width={450} height={450}/>
+      </div>
+     
         <div class="btn-container">
+       
           <button className="link-btn"><a href="#rooms">Book Now</a></button>
         </div>
       </section>

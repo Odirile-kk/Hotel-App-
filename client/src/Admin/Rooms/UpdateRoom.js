@@ -103,7 +103,7 @@ const AddRooms = () => {
                     />
                 </div>
 
-                <button onClick={handleSubmit}><Link to={'/'}>Submit</Link></button>
+                <button           style={{marginLeft: '40%', padding: '2%', borderRadius: '10px', backgroundColor: 'blue', marginTop: '5%'}}  onClick={handleSubmit}><Link to={'/'}>Submit</Link></button>
             </form>
         </div>
     );

@@ -41,6 +41,7 @@ const AdminPanel = () => {
                       <th scope="col">
                         #
                       </th>
+                      <th scope="col"></th>
                       <th scope="col">Room no.</th>
                       <th scope="col">Name</th>
                       <th scope="col">Price</th>
@@ -52,6 +53,8 @@ const AdminPanel = () => {
                     {rooms.map((room) => (
                       <tr key={room._id}>
                         <th scope="row"></th>
+                        <td>
+                        <img src={room.image} width={90} height={90} /></td>
                         <td>{room.roomNumber}</td>
                         <td>{room.title}</td>
                         <td>{room.price}</td>

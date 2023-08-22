@@ -57,7 +57,9 @@ const UpdateUser = () => {
               onChange={(e) => setInput({ ...input, email: e.target.value })}
             />
           </div>
-          <button onClick={handleSubmit}>
+          <button onClick={handleSubmit} 
+          style={{marginLeft: '40%', padding: '2%', borderRadius: '10px', backgroundColor: 'blue', marginTop: '5%'}} 
+          >
             <Link to={"/adminuser"}>Submit</Link>
           </button>
         </form>

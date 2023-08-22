@@ -17,6 +17,7 @@ import UpdateBooking from "./Admin/Bookings/UpdateBooking";
 import AddUser from "./Admin/Users/AddUser";
 import UpdateUser from "./Admin/Users/UpdateUser";
 import Payment from './Pages/Payment'
+import Register from "./Pages/Register";
 
 function App () {
   return (
@@ -41,6 +42,11 @@ function App () {
         <Route path="/addbooking" element={<AddBooking />}></Route>
         <Route path="/adminBooking" element={<AdminBooking />}></Route>
         <Route path="/updateBooking/:id" element={<UpdateBooking />}></Route>
+
+
+        <Route path="/register" element={<Register />}></Route>
+
+
 
         {/*Admin panel for users */}
         <Route path="/adminuser" element={<AdminUsers />}></Route>

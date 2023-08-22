@@ -8,7 +8,7 @@ export const verifyToken = (req, res, next) => {
   }
 
   //for the token, change process.env.jwt coz you don have A .env file
-  jwt.verify(token, process.env.JWT, (err, user) => {
+  jwt.verify(token, "secret12345", (err, user) => {
     if (err) return next(createError(403, "Token is not valid!"));
     req.user = user;
     next();
