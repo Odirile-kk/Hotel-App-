@@ -11,12 +11,15 @@ export const postUsers = createAsyncThunk('booking/postBookingOptions',async (op
 }
 );
 
+
+const storedToken = localStorage.getItem('accessToken');
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    users: JSON.parse(localStorage.getItem('user')) || null,
+    users: null,
     loading: false,
     error: null,
+    accessToken: storedToken,
   },
   reducers: {
     loginStart: (state) => {
@@ -43,9 +46,12 @@ const authSlice = createSlice({
     setAccessToken: (state, action) => {
       state.accessToken = action.payload;
     },
+    clearAccessToken: (state) => {
+      state.accessToken = null;
+    },
   },
 });
 
-export const { setAccessToken,loginStart, loginSuccess, loginFailure, logout } = authSlice.actions;
+export const { clearAccessToken ,setAccessToken,loginStart, loginSuccess, loginFailure, logout } = authSlice.actions;
 
 export default authSlice.reducer;

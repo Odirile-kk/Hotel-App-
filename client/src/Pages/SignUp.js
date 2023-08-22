@@ -6,14 +6,36 @@ import { useNavigate } from "react-router-dom";
 
 const SignUp = ({ isOpen, onClose }) => {
 
-   const dispatch = useDispatch();
-   const loading = useSelector((state) => state.auth.loading);
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.auth.loading);
+  const token = useSelector((state) => state.auth.accessToken); 
  
  const nav = useNavigate()
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
  
-   const handleSubmit = async (e) => {
+  //  const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   dispatch(loginStart());
+
+  //   try {
+  //     const options = { email, password };
+  //     const response = await dispatch(postUsers(options));
+
+  //     if (postUsers.fulfilled.match(response)) {
+  //       dispatch(loginSuccess(response.payload));
+  //       dispatch(setAccessToken(response.payload.accessToken)); // Store access token
+        
+  //     } else {
+  //       dispatch(loginFailure(response.error));
+  //     }
+  //   } catch (error) {
+  //     dispatch(loginFailure(error));
+  //   }
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     dispatch(loginStart());
@@ -24,8 +46,9 @@ const SignUp = ({ isOpen, onClose }) => {
 
       if (postUsers.fulfilled.match(response)) {
         dispatch(loginSuccess(response.payload));
-        dispatch(setAccessToken(response.payload.accessToken)); // Store access token
-        
+        dispatch(setAccessToken(response.payload.token)); // Store the token
+        localStorage.setItem('accessToken', response.payload.token);
+        console.log(response.payload.token)
       } else {
         dispatch(loginFailure(response.error));
       }

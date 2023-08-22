@@ -43,6 +43,8 @@ const Book = () => {
   // Find the specific room with the provided ID
   const room = rooms.find((room) => room._id === id);
 
+  const isAuthenticated = useSelector((state) => state.auth.accessToken !== null);
+
   const [bookingOptions, setBookingOptions] = useState({
     startDate: "",
     endDate: "",
@@ -76,7 +78,12 @@ const Book = () => {
     console.log(totalPrice);
     console.log("book clicked");
 
-    navigate("/payment", { state: { totalPrice } });
+    if (isAuthenticated) {
+      navigate("/payment", { state: { totalPrice } }); // Navigate to payment page
+    } else {
+      alert('Please login or Sign Up to continue')
+    }
+  
   };
 
   const handleOption = (name, operation) => {

@@ -43,10 +43,7 @@ function App () {
         <Route path="/adminBooking" element={<AdminBooking />}></Route>
         <Route path="/updateBooking/:id" element={<UpdateBooking />}></Route>
 
-
         <Route path="/register" element={<Register />}></Route>
-
-
 
         {/*Admin panel for users */}
         <Route path="/adminuser" element={<AdminUsers />}></Route>
