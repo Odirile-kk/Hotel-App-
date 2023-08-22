@@ -18,8 +18,13 @@ import AddUser from "./Admin/Users/AddUser";
 import UpdateUser from "./Admin/Users/UpdateUser";
 import Payment from './Pages/Payment'
 import Register from "./Pages/Register";
+import { useSelector } from "react-redux";
 
 function App () {
+
+  const isAuthenticated = useSelector(state => state.auth.accessToken !== null);
+
+
   return (
     <BrowserRouter>
       <Routes>
@@ -27,9 +32,17 @@ function App () {
         <Route path="/room/:id" element={<Book />}></Route>
         <Route path="/gallery" element={<Gallery />}></Route>
         <Route path="/terms" element={<Terms />}></Route>
-        <Route path="/account" element={<Account />}></Route>
-        <Route path="/bookings" element={<Bookings />}></Route>
-        <Route path="/payment" element={<Payment />}></Route>
+
+        {isAuthenticated ? (
+          <>
+            <Route path="/account" element={<Account />} />
+            <Route path="/bookings" element={<Bookings />} />
+            <Route path="/payment" element={<Payment />} />
+          </>
+        ) : (
+          <Route path="/" element={<LandingPage />}></Route>
+        )}
+       
 
         {/*Admin panel for rooms */}
         <Route path="/adminpanel" element={<AdminPanel />}></Route>
