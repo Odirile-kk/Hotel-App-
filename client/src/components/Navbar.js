@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import SignUp from "../Pages/SignUp";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux"; // Import useDispatch and useSelector
+import { useDispatch, useSelector } from "react-redux"; 
 import logo from "../../src/assets/deluxesmall.png";
-import { clearAccessToken, setAccessToken } from "../Redux/authSlice"; // Import the action to clear the access token
+import { clearAccessToken, setAccessToken } from "../Redux/authSlice";
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,7 +14,6 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
 
-  // Check for the token in local storage on page load
   useEffect(() => {
     const storedToken = localStorage.getItem("accessToken");
     if (storedToken) {

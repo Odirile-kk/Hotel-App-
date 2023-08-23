@@ -18,6 +18,7 @@ const SignUp = ({ isOpen, onClose }) => {
     .then((action) => {
       if (postUsers.fulfilled.match(action)) {
         alert('Login successful! Redirecting to home page.');
+        window.location.reload()
         nav('/');
       } else if (postUsers.rejected.match(action)) {
         alert('Login failed. Please try again.');
