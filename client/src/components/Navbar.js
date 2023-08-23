@@ -35,7 +35,9 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    dispatch(clearAccessToken()); // Clear the access token
+    dispatch(clearAccessToken());
+    console.log("clearing the token");
+    // Clear the access token
     // Additional logout logic if needed
   };
 
@@ -44,9 +46,21 @@ const Navbar = () => {
   };
 
   const handleBookings = () => {
-    console.log('siyahamba')
+    console.log("siyahamba");
     nav("/bookings");
   };
+
+  function handleSelection(event) {
+    const selectedValue = event.target.value;
+
+    if (selectedValue === "logout") {
+      handleLogout();
+    } else if (selectedValue === "profile") {
+      handleProfile();
+    } else if (selectedValue === "bookings") {
+      handleBookings();
+    }
+  }
 
   return (
     <div>
@@ -84,6 +98,7 @@ const Navbar = () => {
           <div>
             {token ? (
               <select
+                onChange={handleSelection}
                 className="custom-select"
                 style={{
                   backgroundColor: "#203F5B",
@@ -92,10 +107,10 @@ const Navbar = () => {
                   color: "white",
                 }}
               >
-                <option>Account</option>
-                <option onChange={handleLogout}>Logout</option>
-                <option onChange={handleProfile}>Profile</option>
-                <option onClick={handleBookings}>Bookings</option>
+                <option value="account">Account</option>
+                <option value="logout">Logout</option>
+                <option value="profile">Profile</option>
+                <option value="bookings">Bookings</option>
               </select>
             ) : (
               <button

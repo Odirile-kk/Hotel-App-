@@ -4,21 +4,59 @@ import { createError } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
 //register new user
+// export const register = async (req, res, next) => {
+//   try {
+
+//     //generate the hashing method to conceal the password
+//     const salt = bcrypt.genSaltSync(10);
+//     //hash the user password for added security
+//     const hash = bcrypt.hashSync(req.body.password, salt);
+
+//     const newUser = new User({
+//       ...req.body,
+//       password: hash,
+//     });
+
+//     await newUser.save();
+//     res.status(200).send("User has been created.");
+//   } catch (err) {
+//     next(err);
+//   }
+// };
+
+const ADMIN_SECRET_CODE = '12349';
+
 export const register = async (req, res, next) => {
   try {
+    const { username, email, password, isAdmin, secretCode } = req.body;
 
-    //generate the hashing method to conceal the password
-    const salt = bcrypt.genSaltSync(10);
-    //hash the user password for added security
-    const hash = bcrypt.hashSync(req.body.password, salt);
+    // Check if user is admin and secret code matches
+    if (isAdmin && secretCode === ADMIN_SECRET_CODE) {
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(password, salt);
 
-    const newUser = new User({
-      ...req.body,
-      password: hash,
-    });
+      // Save user with isAdmin set to true
+      const newUser = new User({
+        username,
+        email,
+        password: hash,
+        isAdmin: true,
+      });
+      await newUser.save();
+      return res.status(200).send("Admin user has been created.");
+    } else {
+      // Save user with isAdmin set to false
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(password, salt);
 
-    await newUser.save();
-    res.status(200).send("User has been created.");
+      const newUser = new User({
+        username,
+        email,
+        password: hash,
+      });
+      await newUser.save();
+      return res.status(200).send("User has been created.");
+    }
   } catch (err) {
     next(err);
   }

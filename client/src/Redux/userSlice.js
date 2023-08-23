@@ -14,6 +14,17 @@ export const postUsers = createAsyncThunk('user/postUsers',async (options) => {
 }
 );
 
+export const createUsers = createAsyncThunk('users/createUsers',async (options) => {
+  try {
+    const response = await axios.post(`http://localhost:3000/api/auth/register`, options);
+    console.log('this is res state', response)
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+}
+);
+
 export const getUsers = createAsyncThunk('user/getUsers',async () => {
   try {
     const response = await axios.get(`${API_URL}`);

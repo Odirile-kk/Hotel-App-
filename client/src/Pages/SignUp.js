@@ -14,32 +14,9 @@ const SignUp = ({ isOpen, onClose }) => {
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
  
-  //  const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   dispatch(loginStart());
-
-  //   try {
-  //     const options = { email, password };
-  //     const response = await dispatch(postUsers(options));
-
-  //     if (postUsers.fulfilled.match(response)) {
-  //       dispatch(loginSuccess(response.payload));
-  //       dispatch(setAccessToken(response.payload.accessToken)); // Store access token
-        
-  //     } else {
-  //       dispatch(loginFailure(response.error));
-  //     }
-  //   } catch (error) {
-  //     dispatch(loginFailure(error));
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     dispatch(loginStart());
-
     try {
       const options = { email, password };
       const response = await dispatch(postUsers(options));

@@ -1,6 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+export const registerUser = createAsyncThunk('users/createUsers',async (options) => {
+  try {
+    const response = await axios.post('http://localhost:3000/api/auth/register', options);
+    console.log('this is res state', response)
+    return response.data;
+  } catch (error) {
+    throw error.response.data.message || 'Registration failed';
+  }
+}
+);
+
 export const postUsers = createAsyncThunk('booking/postBookingOptions',async (options) => {
   try {
     const response = await axios.post(`http://localhost:3000/api/auth/login`, options);
@@ -20,6 +31,10 @@ const authSlice = createSlice({
     loading: false,
     error: null,
     accessToken: storedToken,
+
+    registrationLoading: false,
+    registrationError: null,
+    registrationSuccess: null,
   },
   reducers: {
     loginStart: (state) => {
@@ -49,6 +64,23 @@ const authSlice = createSlice({
     clearAccessToken: (state) => {
       state.accessToken = null;
     },
+  },
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(registerUser.pending, (state) => {
+        state.registrationLoading = true;
+        state.registrationError = null;
+        state.registrationSuccess = null;
+      })
+      .addCase(registerUser.fulfilled, (state) => {
+        state.registrationLoading = false;
+        state.registrationSuccess = true;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.registrationLoading = false;
+        state.registrationError = action.error.message || 'Registration failed';
+      });
   },
 });
 
