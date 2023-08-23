@@ -65,7 +65,6 @@ const RoomSchema = new mongoose.Schema(
     unavailableDate: {
       type: Date
     }
-    
   },
   { timestamps: true }
 );
