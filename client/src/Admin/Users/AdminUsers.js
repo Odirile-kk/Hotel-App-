@@ -53,9 +53,7 @@ const AdminUsers = () => {
           
 
           <div className="row my-5">
-          <button>
-          <Link to={"/adduser"}>Add a user</Link>
-          </button>
+          
             <h3 className="fs-4 mb-3">Users</h3>
             
             <div

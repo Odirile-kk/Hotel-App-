@@ -37,8 +37,7 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(clearAccessToken());
     console.log("clearing the token");
-    // Clear the access token
-    // Additional logout logic if needed
+    window.location.reload()
   };
 
   const handleProfile = () => {

@@ -23,45 +23,44 @@ import { useSelector } from "react-redux";
 function App () {
 
   const isAuthenticated = useSelector(state => state.auth.accessToken !== null);
+  const isAdmin = useSelector(state => state.auth.isAdmin);
 
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPage />}></Route>
-        <Route path="/room/:id" element={<Book />}></Route>
-        <Route path="/gallery" element={<Gallery />}></Route>
-        <Route path="/terms" element={<Terms />}></Route>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/room/:id" element={<Book />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/terms" element={<Terms />} />
 
         {isAuthenticated ? (
           <>
             <Route path="/account" element={<Account />} />
             <Route path="/bookings" element={<Bookings />} />
             <Route path="/payment" element={<Payment />} />
+
+            {/* Protected Admin Routes */}
+            {isAdmin && (
+              <>
+                <Route path="/adminpanel" element={<AdminPanel />} />
+                <Route path="/addrooms" element={<AddRooms />} />
+                <Route path="/adminUsers" element={<AdminUsers />} />
+                <Route path="/adminBookings" element={<AdminBooking />} />
+                <Route path="/adminUpdate/:id" element={<UpdateRoom />} />
+                <Route path="/addbooking" element={<AddBooking />} />
+                <Route path="/updateBooking/:id" element={<UpdateBooking />} />
+                <Route path="/adduser" element={<AddUser />} />
+                <Route path="/updateuser/:id" element={<UpdateUser />} />
+              </>
+            )}
           </>
         ) : (
-          <Route path="/" element={<LandingPage />}></Route>
+          // Redirect unauthenticated users to landing page
+          <Route path="/" element={<LandingPage/>} />
         )}
-       
 
-        {/*Admin panel for rooms */}
-        <Route path="/adminpanel" element={<AdminPanel />}></Route>
-        <Route path="/addrooms" element={<AddRooms />}></Route>
-        <Route path="/adminUsers" element={<AdminUsers />}></Route>
-        <Route path="/adminBookings" element={<AdminBooking />}></Route>
-        <Route path="/adminUpdate/:id" element={<UpdateRoom />}></Route>
-
-        {/*Admin panel for booking */}
-        <Route path="/addbooking" element={<AddBooking />}></Route>
-        <Route path="/adminBooking" element={<AdminBooking />}></Route>
-        <Route path="/updateBooking/:id" element={<UpdateBooking />}></Route>
-
-        <Route path="/register" element={<Register />}></Route>
-
-        {/*Admin panel for users */}
-        <Route path="/adminuser" element={<AdminUsers />}></Route>
-        <Route path="/adduser" element={<AddUser />}></Route>
-        <Route path="/updateuser/:id" element={<UpdateUser />}/>
+        <Route path="/" element={<LandingPage/>} />
       </Routes>
     </BrowserRouter>
   );

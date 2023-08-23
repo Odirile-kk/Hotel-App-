@@ -7,31 +7,22 @@ import { useNavigate } from "react-router-dom";
 const SignUp = ({ isOpen, onClose }) => {
 
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.auth.loading);
-  const token = useSelector((state) => state.auth.accessToken); 
- 
+  
  const nav = useNavigate()
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(loginStart());
-    try {
-      const options = { email, password };
-      const response = await dispatch(postUsers(options));
-
-      if (postUsers.fulfilled.match(response)) {
-        dispatch(loginSuccess(response.payload));
-        dispatch(setAccessToken(response.payload.token)); // Store the token
-        localStorage.setItem('accessToken', response.payload.token);
-        console.log(response.payload.token)
-      } else {
-        dispatch(loginFailure(response.error));
+    dispatch(postUsers({email, password}))
+    .then((action) => {
+      if (postUsers.fulfilled.match(action)) {
+        alert('Login successful! Redirecting to home page.');
+        nav('/');
+      } else if (postUsers.rejected.match(action)) {
+        alert('Login failed. Please try again.');
       }
-    } catch (error) {
-      dispatch(loginFailure(error));
-    }
+    });
   };
 
 
@@ -75,7 +66,7 @@ const SignUp = ({ isOpen, onClose }) => {
           {/* {loading ? 'Logging in...' : 'Login'} */}
           </button>
           <p  style={{marginTop: '8%'}}>Not registered?</p>
-          <button style={{backgroundColor: '#203f5b', padding: '2%', borderRadius: '10px', color: 'white'}} type="submit">Register</button>
+          <button style={{backgroundColor: '#203f5b', padding: '2%', borderRadius: '10px', color: 'white'}} type="submit" onClick={e => nav('/register')}>Register</button>
           </div>
           
         </form>

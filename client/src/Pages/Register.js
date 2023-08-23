@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../Redux/authSlice";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
   const dispatch = useDispatch();
-
+const navigate = useNavigate()
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,8 +18,17 @@ const Register = () => {
     const payload = isAdmin
       ? { username, email, password, isAdmin, secretCode }
       : { username, email, password };
-
-    dispatch(registerUser(payload));
+  
+    dispatch(registerUser(payload))
+      .then((action) => {
+        if (registerUser.fulfilled.match(action)) {
+         
+          toast.success('Registration successful! Redirecting to home page.');
+          navigate('/');
+        } else if (registerUser.rejected.match(action)) {
+          toast.error('Registration failed. Please try again.');
+        }
+      });
   };
 
   return (
@@ -120,7 +131,7 @@ const Register = () => {
                     <div className="d-flex justify-content-center">
                       <button
                         type="button"
-                        className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+                      style={{padding: '10px', borderRadius: '14px', backgroundColor: '#203f5b', color: 'white'}}
                         onClick={handleRegister}
                       >
                         Register
@@ -129,7 +140,7 @@ const Register = () => {
 
                     <p className="text-center text-muted mt-5 mb-0">
                       Have already an account?{" "}
-                      <a href="#!" className="fw-bold text-body">
+                      <a href="#!" className="fw-bold text-body" onClick={e => navigate('/')}>
                         <u>Login here</u>
                       </a>
                     </p>

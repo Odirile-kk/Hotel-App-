@@ -4,9 +4,11 @@ import axios from 'axios';
 export const registerUser = createAsyncThunk('users/createUsers',async (options) => {
   try {
     const response = await axios.post('http://localhost:3000/api/auth/register', options);
+    localStorage.setItem('accessToken', response.data.accessToken); 
     console.log('this is res state', response)
     return response.data;
   } catch (error) {
+    localStorage.removeItem('accessToken'); 
     throw error.response.data.message || 'Registration failed';
   }
 }
@@ -15,15 +17,17 @@ export const registerUser = createAsyncThunk('users/createUsers',async (options)
 export const postUsers = createAsyncThunk('booking/postBookingOptions',async (options) => {
   try {
     const response = await axios.post(`http://localhost:3000/api/auth/login`, options);
-    return response.data;
+    localStorage.setItem('accessToken', response.data.accessToken); 
   } catch (error) {
-    return error;
+    localStorage.removeItem('accessToken'); 
+    throw error;
   }
 }
 );
 
-
+    
 const storedToken = localStorage.getItem('accessToken');
+
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
@@ -46,11 +50,13 @@ const authSlice = createSlice({
       state.user = action.payload;
       state.loading = false;
       state.error = null;
+      state.accessToken = localStorage.getItem('accessToken'); 
     },
     loginFailure: (state, action) => {
       state.user = null;
       state.loading = false;
       state.error = action.payload;
+      state.accessToken = null;
     },
     logout: (state) => {
       state.user = null;
@@ -62,7 +68,11 @@ const authSlice = createSlice({
       state.accessToken = action.payload;
     },
     clearAccessToken: (state) => {
-      state.accessToken = null;
+      state.user = null;
+  state.loading = false;
+  state.error = null;
+  localStorage.removeItem('accessToken'); 
+  console.log('token cleared')
     },
   },
 

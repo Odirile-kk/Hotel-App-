@@ -4,27 +4,6 @@ import axios from 'axios';
 const API_URL = 'http://localhost:3000/api/users/';
 
 
-export const postUsers = createAsyncThunk('user/postUsers',async (options) => {
-  try {
-    const response = await axios.post(`${API_URL}`, options);
-    return response.data;
-  } catch (error) {
-    return error;
-  }
-}
-);
-
-export const createUsers = createAsyncThunk('users/createUsers',async (options) => {
-  try {
-    const response = await axios.post(`http://localhost:3000/api/auth/register`, options);
-    console.log('this is res state', response)
-    return response.data;
-  } catch (error) {
-    return error;
-  }
-}
-);
-
 export const getUsers = createAsyncThunk('user/getUsers',async () => {
   try {
     const response = await axios.get(`${API_URL}`);
@@ -61,26 +40,11 @@ try {
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    registrationLoading: false,
-    registrationError: null,
+    
     users: [],
   },
   reducers: {
-    registrationStart: (state) => {
-      state.registrationLoading = true;
-      state.registrationError = null;
-    },
-    registrationSuccess: (state) => {
-      state.registrationLoading = false;
-      state.registrationError = null;
-    },
-    registrationFailure: (state, action) => {
-      state.registrationLoading = false;
-      state.registrationError = action.payload;
-    },
-    addUser: (state, action) => {
-      state.users.push(action.payload); 
-    },
+   
     deleteUser: (state, action) => {
       const userId = action.payload;
       state.users = state.users.filter(user => user.id !== userId);
@@ -102,7 +66,7 @@ const userSlice = createSlice({
 });
 
 
-export const {registrationStart, registrationSuccess, registrationFailure, addUser, deleteUser, updateUser
+export const { addUser, deleteUser, updateUser
 } = userSlice.actions;
 
 export default userSlice.reducer;
