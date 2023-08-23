@@ -18,6 +18,7 @@ export const postUsers = createAsyncThunk('booking/postBookingOptions',async (op
   try {
     const response = await axios.post(`http://localhost:3000/api/auth/login`, options);
     localStorage.setItem('accessToken', response.data.accessToken); 
+    return response.data
   } catch (error) {
     localStorage.removeItem('accessToken'); 
     throw error;
@@ -25,8 +26,6 @@ export const postUsers = createAsyncThunk('booking/postBookingOptions',async (op
 }
 );
 
-    
-const storedToken = localStorage.getItem('accessToken');
 
 const authSlice = createSlice({
   name: 'auth',
@@ -34,7 +33,7 @@ const authSlice = createSlice({
     users: null,
     loading: false,
     error: null,
-    accessToken: storedToken,
+    accessToken: null,
 
     registrationLoading: false,
     registrationError: null,
@@ -50,7 +49,8 @@ const authSlice = createSlice({
       state.user = action.payload;
       state.loading = false;
       state.error = null;
-      state.accessToken = localStorage.getItem('accessToken'); 
+      // state.accessToken = localStorage.getItem('accessToken'); 
+      state.accessToken = action.payload.accessToken;
     },
     loginFailure: (state, action) => {
       state.user = null;
@@ -90,7 +90,10 @@ const authSlice = createSlice({
       .addCase(registerUser.rejected, (state, action) => {
         state.registrationLoading = false;
         state.registrationError = action.error.message || 'Registration failed';
-      });
+      })
+      .addCase(postUsers.fulfilled, (state, action) => {
+        state.accessToken = action.payload.accessToken;
+      })
   },
 });
 

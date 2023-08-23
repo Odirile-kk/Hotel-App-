@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { postUsers, loginStart, loginSuccess, loginFailure, setAccessToken} from '../Redux/authSlice';
 import { useNavigate } from "react-router-dom";
+import { setUser } from '../Redux/userSlice';
 
 
 const SignUp = ({ isOpen, onClose }) => {
@@ -15,6 +16,7 @@ const SignUp = ({ isOpen, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(postUsers({email, password}))
+    
     .then((action) => {
       if (postUsers.fulfilled.match(action)) {
         alert('Login successful! Redirecting to home page.');
@@ -24,6 +26,7 @@ const SignUp = ({ isOpen, onClose }) => {
         alert('Login failed. Please try again.');
       }
     });
+    
   };
 
 

@@ -16,6 +16,18 @@ export const getUsers = createAsyncThunk('user/getUsers',async () => {
 }
 );
 
+export const getUsersById = createAsyncThunk('user/getUsers',async (input) => {
+  try {
+    const response = await axios.get(`${API_URL}${input.id}`);
+    console.log( 'from the slice',response.data)
+    return response.data;
+  
+  } catch (error) {
+    return error;
+  }
+}
+);
+
 export const updateUsers = createAsyncThunk('user/updateUser',async (data) => {
 console.log('trying to update')
 try {
@@ -44,7 +56,9 @@ const userSlice = createSlice({
     users: [],
   },
   reducers: {
-   
+    setUser: (state, action) => {
+      state.userId = action.payload;
+    },
     deleteUser: (state, action) => {
       const userId = action.payload;
       state.users = state.users.filter(user => user.id !== userId);
@@ -66,7 +80,7 @@ const userSlice = createSlice({
 });
 
 
-export const { addUser, deleteUser, updateUser
+export const { addUser, deleteUser, updateUser, setUser
 } = userSlice.actions;
 
 export default userSlice.reducer;

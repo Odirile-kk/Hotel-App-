@@ -4,12 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"; 
 import logo from "../../src/assets/deluxesmall.png";
 import { clearAccessToken, setAccessToken } from "../Redux/authSlice";
+import {getUsers} from '../Redux/userSlice'
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const nav = useNavigate();
-
+  const {users} = useSelector((state) => state.users);
   const token = useSelector((state) => state.auth.accessToken);
 
   const dispatch = useDispatch();
@@ -18,9 +19,9 @@ const Navbar = () => {
     const storedToken = localStorage.getItem("accessToken");
     if (storedToken) {
       dispatch(setAccessToken(storedToken));
-    }
+    }    
   }, []);
-
+  
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -40,7 +41,7 @@ const Navbar = () => {
   };
 
   const handleProfile = () => {
-    nav("/account");
+   
   };
 
   const handleBookings = () => {
@@ -109,6 +110,11 @@ const Navbar = () => {
                 <option value="logout">Logout</option>
                 <option value="profile">Profile</option>
                 <option value="bookings">Bookings</option>
+                {users.map((user) => (
+                <option key={user._id} value={user._id}>
+                  {user.username}
+                </option>
+                ))}
               </select>
             ) : (
               <button

@@ -23,7 +23,7 @@ import { useSelector } from "react-redux";
 function App () {
 
   const isAuthenticated = useSelector(state => state.auth.accessToken !== null);
-  const isAdmin = useSelector(state => state.auth.isAdmin);
+  const isAdmin = useSelector(state => state.users.isAdmin);
 
 
   return (
@@ -36,12 +36,18 @@ function App () {
 
         {isAuthenticated ? (
           <>
-            <Route path="/account" element={<Account />} />
+            <Route path="/account/:id" element={<Account />} />
             <Route path="/bookings" element={<Bookings />} />
             <Route path="/payment" element={<Payment />} />
 
-            {/* Protected Admin Routes */}
-            {isAdmin && (
+           
+          </>
+        ) : (
+          // Redirect unauthenticated users to landing page
+          <Route path="/" element={<LandingPage/>} />
+        )}
+         {/* Protected Admin Routes */}
+         {!isAdmin && (
               <>
                 <Route path="/adminpanel" element={<AdminPanel />} />
                 <Route path="/addrooms" element={<AddRooms />} />
@@ -54,11 +60,6 @@ function App () {
                 <Route path="/updateuser/:id" element={<UpdateUser />} />
               </>
             )}
-          </>
-        ) : (
-          // Redirect unauthenticated users to landing page
-          <Route path="/" element={<LandingPage/>} />
-        )}
 
         <Route path="/" element={<LandingPage/>} />
       </Routes>
