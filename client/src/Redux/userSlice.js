@@ -7,7 +7,7 @@ const API_URL = 'http://localhost:3000/api/users/';
 export const getUsers = createAsyncThunk('user/getUsers',async () => {
   try {
     const response = await axios.get(`${API_URL}`);
-    console.log( 'from the slice',response.data)
+    console.log( 'users from the slice',response.data)
     return response.data;
   
   } catch (error) {

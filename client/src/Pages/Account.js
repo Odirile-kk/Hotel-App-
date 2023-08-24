@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { updateUsers, getUsersById } from "../Redux/userSlice";
+import { updateUsers, getUsers } from "../Redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
 
 const Account = () => {
   const dispatch = useDispatch();
-  // const { id } = useParams();
+
   const { users } = useSelector((state) => state.users);
   const { accessToken } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  // const findUser = users.find((findUser) => findUser._id === id);
+ 
+  const signedInUser = localStorage.getItem('userDetails')
+  const getUserById = (userId) => {
+    return users.find((user) => user._id === userId);
+  };
 
-  const signedInUser = users.find((user) => user._id === accessToken._id);
+  const signedInUserData = getUserById(signedInUser);
+console.log('this is the signed in user', signedInUserData)
 
   const [input, setInput] = useState({
     username: "",
@@ -23,18 +28,21 @@ const Account = () => {
   });
 
   useEffect(() => {
-    console.log('this is my signed in user',signedInUser)
-    if (signedInUser) {
-      setInput({
-        username: signedInUser.username || "",
-        email: signedInUser.email || "",
-        surname: signedInUser.surname || "",
-        name: signedInUser.name || "",
-        number: signedInUser.number || "",
-      });
-    }
-  }, [signedInUser]);
 
+    dispatch(getUsers())
+
+      setInput({
+        username: signedInUserData.username || "",
+        email: signedInUserData.email || "",
+        surname: signedInUserData.surname || "",
+        name: signedInUserData.name || "",
+        number: signedInUserData.number || "",
+      });
+    
+    
+  },[]);
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

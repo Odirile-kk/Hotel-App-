@@ -69,17 +69,23 @@ const AdminUsers = () => {
                     <th scope="col" width="90">
                       #
                     </th>
+                    <th scope="col" width="90">Username</th>
                     <th scope="col" width="90">Name</th>
+                    <th scope="col" width="90">Surname</th>
                     <th scope="col" width="90">Email</th>
-                    <th scope="col" width="90"></th>
+                    <th scope="col" width="90">Phone number</th>
                   </tr>
                 </thead>
                 <tbody>
                   {users.map((user) => (
                   <tr key={user._id}>
-                    <th scope="row">1</th>
+                    <th scope="row">{user._id}</th>
                     <td>{user.username}</td>
+                    <td>{user.name}</td>
+                    <td>{user.surname}</td>
                     <td>{user.email}</td>
+                    <td>{user.phone}</td>
+                    
                     <td>
                       <button><Link to={`/updateuser/${user._id}`}>Update</Link></button>
                       <button onClick={e => handleDelete(user._id)}>Delete</button>

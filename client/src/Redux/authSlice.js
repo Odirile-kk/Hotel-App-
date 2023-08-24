@@ -4,11 +4,10 @@ import axios from 'axios';
 export const registerUser = createAsyncThunk('users/createUsers',async (options) => {
   try {
     const response = await axios.post('http://localhost:3000/api/auth/register', options);
-    localStorage.setItem('accessToken', response.data.accessToken); 
-    console.log('this is res state', response)
+    
     return response.data;
   } catch (error) {
-    localStorage.removeItem('accessToken'); 
+    // localStorage.removeItem('accessToken'); 
     throw error.response.data.message || 'Registration failed';
   }
 }
@@ -17,7 +16,10 @@ export const registerUser = createAsyncThunk('users/createUsers',async (options)
 export const postUsers = createAsyncThunk('booking/postBookingOptions',async (options) => {
   try {
     const response = await axios.post(`http://localhost:3000/api/auth/login`, options);
-    localStorage.setItem('accessToken', response.data.accessToken); 
+    localStorage.setItem('accessToken', response.data.token);
+    localStorage.setItem('userDetails', response.data.details._id); 
+
+    console.log('auth slice :', response.data.details)
     return response.data
   } catch (error) {
     localStorage.removeItem('accessToken'); 
@@ -30,10 +32,9 @@ export const postUsers = createAsyncThunk('booking/postBookingOptions',async (op
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    users: null,
-    loading: false,
-    error: null,
+ 
     accessToken: null,
+    userDetails: null, // Add this line for storing user details
 
     registrationLoading: false,
     registrationError: null,
@@ -63,15 +64,19 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+    setDetails: (state, action) => {
+      state.userDetails = action.payload;
+     },
 
     setAccessToken: (state, action) => {
-      state.accessToken = action.payload;
+     state.accessToken = action.payload;
     },
     clearAccessToken: (state) => {
       state.user = null;
   state.loading = false;
   state.error = null;
   localStorage.removeItem('accessToken'); 
+  localStorage.removeItem('userDetails'); 
   console.log('token cleared')
     },
   },
@@ -92,11 +97,15 @@ const authSlice = createSlice({
         state.registrationError = action.error.message || 'Registration failed';
       })
       .addCase(postUsers.fulfilled, (state, action) => {
+        console.log('add case',action.payload.details); // Check the payload structure in the console
+
         state.accessToken = action.payload.accessToken;
+        state.userDetails = action.payload.details; // Assuming the payload contains details
+
       })
   },
 });
 
-export const { clearAccessToken ,setAccessToken,loginStart, loginSuccess, loginFailure, logout } = authSlice.actions;
+export const { setDetails,clearAccessToken ,setAccessToken,loginStart, loginSuccess, loginFailure, logout } = authSlice.actions;
 
 export default authSlice.reducer;

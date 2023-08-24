@@ -33,8 +33,9 @@ function App () {
         <Route path="/room/:id" element={<Book />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/register" element={<Register />} />
 
-        {isAuthenticated ? (
+        {/* {isAuthenticated ? ( */}
           <>
             <Route path="/account/:id" element={<Account />} />
             <Route path="/bookings" element={<Bookings />} />
@@ -42,10 +43,10 @@ function App () {
 
            
           </>
-        ) : (
-          // Redirect unauthenticated users to landing page
+        {/* ) : ( */}
+          
           <Route path="/" element={<LandingPage/>} />
-        )}
+        {/* )} */}
          {/* Protected Admin Routes */}
          {!isAdmin && (
               <>

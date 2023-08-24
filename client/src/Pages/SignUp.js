@@ -80,5 +80,3 @@ const SignUp = ({ isOpen, onClose }) => {
 };
 
 export default SignUp;
-
-

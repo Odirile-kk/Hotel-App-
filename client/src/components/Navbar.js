@@ -4,13 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"; 
 import logo from "../../src/assets/deluxesmall.png";
 import { clearAccessToken, setAccessToken } from "../Redux/authSlice";
-import {getUsers} from '../Redux/userSlice'
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const nav = useNavigate();
-  const {users} = useSelector((state) => state.users);
+  // const {users} = useSelector((state) => state.users);
   const token = useSelector((state) => state.auth.accessToken);
 
   const dispatch = useDispatch();
@@ -20,6 +19,12 @@ const Navbar = () => {
     if (storedToken) {
       dispatch(setAccessToken(storedToken));
     }    
+    const details = localStorage.getItem("userDetails");
+    if (details) {
+      dispatch(setAccessToken(details));
+    }    
+
+    console.log('in the useffect')
   }, []);
   
   const openModal = () => {
@@ -41,11 +46,15 @@ const Navbar = () => {
   };
 
   const handleProfile = () => {
-   
+    const details = localStorage.getItem("userDetails");
+    if (details) {
+      dispatch(setAccessToken(details));
+    }  
+    nav(`/account/${details}`)  
+console.log('in the profile', details)
   };
 
   const handleBookings = () => {
-    console.log("siyahamba");
     nav("/bookings");
   };
 
@@ -110,11 +119,7 @@ const Navbar = () => {
                 <option value="logout">Logout</option>
                 <option value="profile">Profile</option>
                 <option value="bookings">Bookings</option>
-                {users.map((user) => (
-                <option key={user._id} value={user._id}>
-                  {user.username}
-                </option>
-                ))}
+                
               </select>
             ) : (
               <button
@@ -126,7 +131,7 @@ const Navbar = () => {
                 }}
                 onClick={openModal}
               >
-                SignUp
+                SignIn
               </button>
             )}
           </div>
