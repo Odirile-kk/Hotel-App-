@@ -321,12 +321,12 @@ h1 {
 
   .date {
     position: absolute;
-    top: 560px;
+    top: 260px;
   }
 
   .options {
     position: absolute;
-    top: 560px;
+    top: 460px;
     background-color: #fff;
     color: gray;
     border-radius: 5px;

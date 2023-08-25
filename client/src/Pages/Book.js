@@ -13,7 +13,7 @@ import Navbar from "../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchRooms } from "../Redux/roomSlice";
-import { postBookingOptions } from "../Redux/bookSlice";
+import { postBookingOptions, getBookingOptions  } from "../Redux/bookSlice";
 
 const Book = () => {
   const [openDate, setOpenDate] = useState(false);
@@ -51,6 +51,8 @@ const Book = () => {
     children: 0,
     rooms: 1,
   });
+
+  const [isDateAvailable, setIsDateAvailable] = useState(true); // Indicator for date availability
  
   useEffect(() => {
     dispatch(fetchRooms()); // Fetch all rooms if needed
@@ -68,13 +70,25 @@ const Book = () => {
     user: ""
   });
 
+//fetch booking info
+  const fetchBookedDates = async () => {
+    try {
+      const response = await dispatch(getBookingOptions()); // Dispatch the async thunk
+      return response.payload; // Assuming booked dates are returned in this format
+    } catch (error) {
+      console.error("Error fetching booked dates:", error);
+      return [];
+    }
+  };
 
-  const handleBookClick = () => {
+  const handleBookClick = async () => {
     const selectedStartDate = date[0].startDate;
     const selectedEndDate = date[0].endDate;
 
     const numberOfDays = differenceInDays(selectedEndDate, selectedStartDate);
     const totalPrice = numberOfDays * room.price; 
+
+    const bookedDates = await fetchBookedDates(); // Fetch booked dates using the async thunk
 
     const updatedBookingOptions = {
       startDate: selectedStartDate,
@@ -86,6 +100,19 @@ const Book = () => {
       price: totalPrice,
       user: signedInUserData
     };
+
+    // Check if the selected dates conflict with booked dates
+    const isConflict = bookedDates.some((bookedDate) => {
+      return (
+        selectedStartDate <= new Date(bookedDate.endDate) &&
+        selectedEndDate >= new Date(bookedDate.startDate)
+      );
+    });
+
+    if (isConflict) {
+      setIsDateAvailable(false);
+      return; // Don't proceed with booking
+    }
 
     setBookingOptions(updatedBookingOptions);
     dispatch(postBookingOptions(updatedBookingOptions));
@@ -272,6 +299,12 @@ const Book = () => {
               )}
             </div>
           </div>
+          {!isDateAvailable && (
+          <p className="date-conflict-message">
+            Selected dates are not available for booking. Please select new dates.
+          </p>
+        )}
+
           <button className="book-btn" onClick={handleBookClick}>
             Book
           </button>
