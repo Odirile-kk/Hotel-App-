@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { updateUsers, getUsers } from "../Redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
@@ -8,16 +8,19 @@ const Account = () => {
   const dispatch = useDispatch();
 
   const { users } = useSelector((state) => state.users);
-  const { accessToken } = useSelector((state) => state.auth);
+  
   const navigate = useNavigate();
- 
+ //retrieve token from local storage and assign it to signInUser
   const signedInUser = localStorage.getItem('userDetails')
+
+  //using the details associated with the token, find the userid that matches the one generated when use logged in
   const getUserById = (userId) => {
     return users.find((user) => user._id === userId);
   };
 
   const signedInUserData = getUserById(signedInUser);
-console.log('this is the signed in user', signedInUserData)
+  
+// console.log('this is the signed in user', signedInUserData)
 
   const [input, setInput] = useState({
     username: "",
@@ -48,7 +51,7 @@ console.log('this is the signed in user', signedInUserData)
     e.preventDefault();
 
     try {
-      await dispatch(updateUsers({ id: signedInUser._id, ...input }));
+     dispatch(updateUsers({ id: signedInUser._id, ...input }));
       console.log("posting", input);
       navigate("/");
     } catch (error) {

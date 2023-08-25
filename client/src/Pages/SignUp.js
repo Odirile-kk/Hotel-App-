@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { postUsers, loginStart, loginSuccess, loginFailure, setAccessToken} from '../Redux/authSlice';
+import { useDispatch } from 'react-redux';
+import { postUsers} from '../Redux/authSlice';
 import { useNavigate } from "react-router-dom";
-import { setUser } from '../Redux/userSlice';
 
 
 const SignUp = ({ isOpen, onClose }) => {

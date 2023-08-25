@@ -9,6 +9,9 @@ const bookingSchema = new mongoose.Schema({
     adults: Number,
     children: Number,
     rooms: Number,
+    roomName: String,
+    price: Number,
+    user: String
   });
   
 export default mongoose.model('Booking', bookingSchema);

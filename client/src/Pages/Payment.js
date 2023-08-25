@@ -1,29 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { setAccessToken } from "../Redux/authSlice";
+import { getUsers, setUser } from "../Redux/userSlice";
+import { updateBooking } from "../Redux/bookSlice";
 
 const Payment = ({route}) => {
   const [payment, setPayment] = useState(null);
   const location = useLocation();
-  const { totalPrice } = location.state;
-
+  const { totalPrice, numberOfDays } = location.state;
   const data = {
     email: "emkayphozur@gmail.com",
     amount: totalPrice * 100,
   };
 
 
-
   const postPaymentData = async (e) => {
     e.preventDefault();
-    console.log("this is the total price", totalPrice);
+    // console.log("this is the total price", totalPrice);
+   
     try {
       const response = await axios.post(
         "http://localhost:3000/api/payment/initiate-payment",
         data
       );
-      console.log("we posted", response);
+      console.log("payment fired", response);
       setPayment(response);
       console.log("this is resdata", response.data.data.authorization_url);
 
@@ -58,13 +62,14 @@ const Payment = ({route}) => {
               </h2>
             </div>
             <div className="paymentAmt">R {totalPrice}</div>
+            <div>For {numberOfDays} night/s</div>
           </div>
         </div>
 
         <div className="details-container">
           <div className="tab-content">
             <form>
-              <div className="form-row">
+              {/* <div className="form-row">
                 <div className="form-group required">
                   <label className="control-label">Name</label>
                   <input className="form-control" size="4" type="text" required='required'/>
@@ -100,7 +105,7 @@ const Payment = ({route}) => {
                     type="text"
                   />
                 </div>
-              </div>
+              </div> */}
 
               <div className="form-row">
                 <div className="form-group">

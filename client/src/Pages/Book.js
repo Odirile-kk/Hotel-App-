@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
-import bookPic from "../assets/pexels-kindel-media-7294584.jpg";
-import venice1 from "../assets/venice-hotel-1.jpg";
-import venice2 from "../assets/venice-hotel-2.jpg";
-import venice3 from "../assets/venice-hotel-3.jpg";
-import venice4 from "../assets/venice-hotel-4.jpg";
 import "react-datepicker/dist/react-datepicker.css";
 import { MdCalendarMonth } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
-import { BsCheck, BsPersonFill } from "react-icons/bs";
+import {  BsPersonFill } from "react-icons/bs";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
@@ -16,26 +11,13 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { format, differenceInDays } from "date-fns";
 import Navbar from "../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { fetchRooms } from "../Redux/roomSlice";
 import { postBookingOptions } from "../Redux/bookSlice";
 
 const Book = () => {
-  const [date, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
   const [openDate, setOpenDate] = useState(false);
   const [openOptions, setOpenOptions] = useState(false);
-
-  const [options, setOptions] = useState({
-    adults: 2,
-    children: 0,
-    rooms: 1,
-  });
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -43,7 +25,37 @@ const Book = () => {
   // Find the specific room with the provided ID
   const room = rooms.find((room) => room._id === id);
 
+  //find user
+  const { users } = useSelector((state) => state.users);
+ //retrieve token from local storage and assign it to signInUser
+  const signedInUser = localStorage.getItem('userDetails')
+
+  //using the details associated with the token, find the userid that matches the one generated when use logged in
+  const getUserById = (userId) => {
+    return users.find((user) => user._id === userId);
+  };
+
+  const signedInUserData = getUserById(signedInUser);
+
   const isAuthenticated = useSelector((state) => state.auth.accessToken !== null);
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+
+  const [options, setOptions] = useState({
+    adults: 2,
+    children: 0,
+    rooms: 1,
+  });
+ 
+  useEffect(() => {
+    dispatch(fetchRooms()); // Fetch all rooms if needed
+    console.log('this the room title :', signedInUser)
+  }, [dispatch]);
 
   const [bookingOptions, setBookingOptions] = useState({
     startDate: "",
@@ -51,11 +63,11 @@ const Book = () => {
     adults: "",
     children: "",
     rooms: "",
+    roomName: "",
+    price: "",
+    user: ""
   });
 
-  useEffect(() => {
-    dispatch(fetchRooms()); // Fetch all rooms if needed
-  }, [dispatch]);
 
   const handleBookClick = () => {
     const selectedStartDate = date[0].startDate;
@@ -70,20 +82,22 @@ const Book = () => {
       adults: options.adults,
       children: options.children,
       rooms: options.rooms,
+      roomName: room.title,
+      price: totalPrice,
+      user: signedInUserData
     };
 
     setBookingOptions(updatedBookingOptions);
     dispatch(postBookingOptions(updatedBookingOptions));
 
     console.log(totalPrice);
-    console.log("book clicked");
+    // console.log("book clicked");
 
     if (isAuthenticated) {
-      navigate("/payment", { state: { totalPrice } }); // Navigate to payment page
+      navigate("/payment", { state: { totalPrice, numberOfDays } }); // Navigate to payment page
     } else {
       alert('Please login or Sign Up to continue')
     }
-  
   };
 
   const handleOption = (name, operation) => {
@@ -118,16 +132,16 @@ const Book = () => {
           <div className="book-img">
             <Carousel>
               <div>
-                <img src={room.image} alt="Image 1" />
+                <img src={room.image} alt=""/>
               </div>
               <div>
-                <img src={room.image2} alt="Image 2" />
+                <img src={room.image2} alt=""/>
               </div>
               <div>
-                <img src={room.image3} alt="Image 3" />
+                <img src={room.image3} alt=""/>
               </div>
               <div>
-                <img src={room.image4} alt="Image 4" />
+                <img src={room.image4} alt=""/>
               </div>
             </Carousel>
             <div className="book-text">

@@ -24,7 +24,6 @@ const Navbar = () => {
       dispatch(setAccessToken(details));
     }    
 
-    console.log('in the useffect')
   }, []);
   
   const openModal = () => {
