@@ -19,7 +19,6 @@ export const getBookingOptions = createAsyncThunk('booking/getBookingOptions',as
       const response = await axios.get(`${API_URL}`);
       // console.log( 'from the slice',response.data)
       return response.data;
-    
     } catch (error) {
       return error;
     }

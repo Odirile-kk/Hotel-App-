@@ -3,13 +3,13 @@ import abtPic from "../assets/abt4.jpg";
 
 const About = () => {
   return (
-    <div class="about-container">
-      <div class="left">
+    <div className="about-container">
+      <div className="left">
         <img src={abtPic} alt="" className="about-image" />
       </div>
 
-      <div class="right">
-        <div class="about-text">
+      <div className="right">
+        <div className="about-text">
           <h2 className="about-title">Welcome to your home away from home</h2>
           <p className="about-paragrapgh">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.

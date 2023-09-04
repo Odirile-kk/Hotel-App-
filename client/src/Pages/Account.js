@@ -33,16 +33,17 @@ const Account = () => {
   useEffect(() => {
 
     dispatch(getUsers())
-
-      setInput({
-        username: signedInUserData.username || "",
-        email: signedInUserData.email || "",
-        surname: signedInUserData.surname || "",
-        name: signedInUserData.name || "",
-        number: signedInUserData.number || "",
-      });
-    
-    
+// Check if signedInUserData is defined before setting input values
+if (signedInUserData) {
+  setInput({
+    username: signedInUserData.username || "",
+    email: signedInUserData.email || "",
+    surname: signedInUserData.surname || "",
+    name: signedInUserData.name || "",
+    number: signedInUserData.number || "",
+  });
+  console.log('signed in user :', signedInUserData.username);
+}
   },[]);
 
   

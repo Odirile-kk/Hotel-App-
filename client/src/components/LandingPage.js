@@ -103,11 +103,11 @@ useEffect(() => {
       {/*Footer */}
       <section className="footer">
 
-        <div class="footer-clean">
+        <div className="footer-clean">
           <footer>
-            <div class="container">
-              <div class="row justify-content-center">
-                <div class="col-sm-4 col-md-3 item">
+            <div className="container">
+              <div className="row justify-content-center">
+                <div className="col-sm-4 col-md-3 item">
                   <h3>Address</h3>
                   <p>
                     209 Aramis Ave
@@ -119,11 +119,11 @@ useEffect(() => {
                     6529
                   </p>
                 </div>
-                <div class="col-sm-4 col-md-3 item">
+                <div className="col-sm-4 col-md-3 item">
                   <h3>Contact</h3>
                   <p>(011) 834-7699</p>
                 </div>
-                <div class="col-sm-4 col-md-3 item">
+                <div className="col-sm-4 col-md-3 item">
                   <h3>Email</h3>
                   <p>deluxeblu@info.com</p>
                 </div>
@@ -142,7 +142,7 @@ useEffect(() => {
                 </a>
                
               </div>
-              <p class="copyright">De luxe blu © 2018</p>
+              <p className="copyright">De luxe blu © 2018</p>
               </div>
              
             </div>

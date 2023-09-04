@@ -66,8 +66,7 @@ const Book = () => {
     children: "",
     rooms: "",
     roomName: "",
-    price: "",
-    user: ""
+    price: ""
   });
 
 //fetch booking info
@@ -99,6 +98,7 @@ const Book = () => {
       roomName: room.title,
       price: totalPrice,
       user: signedInUserData
+      
     };
 
     // Check if the selected dates conflict with booked dates
