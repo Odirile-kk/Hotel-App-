@@ -33,7 +33,7 @@ const Account = () => {
   useEffect(() => {
 
     dispatch(getUsers())
-// Check if signedInUserData is defined before setting input values
+
 if (signedInUserData) {
   setInput({
     username: signedInUserData.username || "",
@@ -42,17 +42,17 @@ if (signedInUserData) {
     name: signedInUserData.name || "",
     number: signedInUserData.number || "",
   });
-  console.log('signed in user :', signedInUserData.username);
+  console.log('signed in user :', signedInUserData._id);
 }
   },[]);
-
   
+  const id = signedInUserData ? signedInUserData._id : null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-     dispatch(updateUsers({ id: signedInUser._id, ...input }));
+     dispatch(updateUsers({ id, ...input }));
       console.log("posting", input);
       navigate("/");
     } catch (error) {
