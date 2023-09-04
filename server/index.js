@@ -12,7 +12,8 @@ import paymentRoute from "./routes/payment.js"
 
 const app = express()
 
-mongoose.connect('mongodb://127.0.0.1:27017/bookings')
+mongoose.connect('mongodb+srv://mpho:mpho@cluster0.uchhcvt.mongodb.net/')
+
 
 //middlewares
 app.use(cors())

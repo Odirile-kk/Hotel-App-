@@ -14,7 +14,18 @@ const nav = useNavigate()
     price: "",
     maxPeople: "",
     desc: "",
-    roomNumber: ""
+    roomNumber: "",
+    image: "",
+    image1: "",
+    image2: "",
+    image3: "",
+    image4: "",
+    util: "",
+    util1: "",
+    util2: "",
+    util3: "",
+    util4: "",
+    util5: ""
   })
 
   const handleSubmit = async (e) => {
@@ -32,11 +43,8 @@ const nav = useNavigate()
     <div style={{
       display: 'flex',
       justifyContent: 'center',
-      marginTop: '10%',
-    
-
+      // marginTop: '10%',
     }}>
-    
       <form style={{
         width: '40%'
       }}>
@@ -87,7 +95,108 @@ const nav = useNavigate()
           />
         </div>
 
-        <button style={{marginLeft: '40%', padding: '2%', borderRadius: '10px', backgroundColor: 'blue', marginTop: '5%'}} onClick={handleSubmit}><Link to={'/'} style={{textDecoration: 'none', color: 'white'}}>Submit</Link></button>
+        <div className="form-group">
+          <label htmlFor="formGroupExampleInput2">Image</label>
+          <input
+            type="text"
+            className="form-control"
+        
+            onChange={e => setInput({ ...input, image: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="formGroupExampleInput2">Image</label>
+          <input
+            type="text"
+            className="form-control"
+        
+            onChange={e => setInput({ ...input, image1: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="formGroupExampleInput2">Image</label>
+          <input
+            type="text"
+            className="form-control"
+        
+            onChange={e => setInput({ ...input, image2: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="formGroupExampleInput2">Image</label>
+          <input
+            type="text"
+            className="form-control"
+        
+            onChange={e => setInput({ ...input, image3: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="formGroupExampleInput2">Image</label>
+          <input
+            type="text"
+            className="form-control"
+        
+            onChange={e => setInput({ ...input, image4: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="formGroupExampleInput2">util</label>
+          <input
+            type="text"
+            className="form-control"
+        
+            onChange={e => setInput({ ...input, util5: e.target.value })}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="formGroupExampleInput2">util</label>
+          <input
+            type="text"
+            className="form-control"
+        
+            onChange={e => setInput({ ...input, util: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="formGroupExampleInput2">util</label>
+          <input
+            type="text"
+            className="form-control"
+        
+            onChange={e => setInput({ ...input, util1: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="formGroupExampleInput2">util</label>
+          <input
+            type="text"
+            className="form-control"
+        
+            onChange={e => setInput({ ...input, util2: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="formGroupExampleInput2">util</label>
+          <input
+            type="text"
+            className="form-control"
+        
+            onChange={e => setInput({ ...input, util3: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="formGroupExampleInput2">util</label>
+          <input
+            type="text"
+            className="form-control"
+        
+            onChange={e => setInput({ ...input, util4: e.target.value })}
+          />
+        </div>
+
+        <button style={{marginLeft: '40%', padding: '2%', borderRadius: '10px', backgroundColor: 'blue', marginTop: '5%'}} onClick={handleSubmit}><Link to={'/adminpanel'} style={{textDecoration: 'none', color: 'white'}}>Submit</Link></button>
       </form>
     </div>
   );

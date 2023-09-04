@@ -52,7 +52,7 @@ const navigate = useNavigate()
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                       />
-                      <label className="form-label" for="form3Example1cg">
+                      <label className="form-label" htmlFor="form3Example1cg">
                         Your Name
                       </label>
                     </div>
@@ -65,7 +65,7 @@ const navigate = useNavigate()
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
-                      <label className="form-label" for="form3Example3cg">
+                      <label className="form-label" htmlFor="form3Example3cg">
                         Your Email
                       </label>
                     </div>
@@ -78,7 +78,7 @@ const navigate = useNavigate()
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
-                      <label className="form-label" for="form3Example4cg">
+                      <label className="form-label" htmlFor="form3Example4cg">
                         Password
                       </label>
                     </div>
@@ -120,7 +120,7 @@ const navigate = useNavigate()
                         value=""
                         id="form2Example3cg"
                       />
-                      <label className="form-check-label" for="form2Example3g">
+                      <label className="form-check-label" htmlFor="form2Example3g">
                         I agree all statements in{" "}
                         <a href="#!" className="text-body">
                           <u>Terms of service</u>

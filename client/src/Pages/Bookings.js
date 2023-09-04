@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import room from "../assets/Deluxe.png";
 import Navbar from "../components/Navbar";
-import {deleteBooking } from "../Redux/bookSlice";
+import {deleteBooking, getBookingOptions } from "../Redux/bookSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -30,7 +30,7 @@ const Bookings = () => {
   const signedInUserData = getUserById();
 
   useEffect(() => {
-    // dispatch(getBookingOptions())
+    dispatch(getBookingOptions())
     console.log("this is the user id from token :", signedInUserData);
   }, []);
 

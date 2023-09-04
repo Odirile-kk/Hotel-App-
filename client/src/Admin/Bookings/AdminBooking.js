@@ -11,10 +11,8 @@ const AdminBooking = () => {
 
 
     useEffect(() => {
-      
         dispatch(getBookingOptions())
         console.log("book items", book)
-        
     }, [])
 
 
@@ -30,8 +28,6 @@ const AdminBooking = () => {
             </div>
 
             <div id="page-content-wrapper" style={{}}>
-
-
                 <div className="container-fluid px-4" style={{ marginTop: '10%' }}>
                     <button><Link to={'/addbooking'}>Make a booking</Link></button>
 
