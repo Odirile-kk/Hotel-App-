@@ -38,7 +38,7 @@ const SignUp = ({ isOpen, onClose }) => {
         <h2>Sign Up</h2>
         <form style={{marginTop: '8px'}}>
           <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">
+            <label htmlFor="exampleFormControlInput1" className="form-label">
               Email :
             </label>
             <input
@@ -51,7 +51,7 @@ const SignUp = ({ isOpen, onClose }) => {
             />
           </div>
           <div className="form-group">
-            <label for="inputPassword5" class="form-label">
+            <label htmlFor="inputPassword5" className="form-label">
               Password : 
             </label>
             <input

@@ -35,18 +35,16 @@ function App () {
         <Route path="/terms" element={<Terms />} />
         <Route path="/register" element={<Register />} />
 
-        {/* {isAuthenticated ? ( */}
+        {isAuthenticated ? (
           <>
             <Route path="/account/:id" element={<Account />} />
             <Route path="/bookings" element={<Bookings />} />
             <Route path="/payment" element={<Payment />} />
-
-           
           </>
-        {/* ) : ( */}
+        ) : (
           
           <Route path="/" element={<LandingPage/>} />
-        {/* )} */}
+        )}
          {/* Protected Admin Routes */}
          {!isAdmin && (
               <>

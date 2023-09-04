@@ -63,36 +63,36 @@ useEffect(() => {
       
 
       
-          <div class="contact-image">
+          <div className="contact-image">
             <img src={contact} alt="Image" />
           </div>
 
-          <div class="form">
+          <div className="form">
           <h1>Contact Us</h1>
-            <form class="text-center border border-light p-5" action="#!">
+            <form className="text-center border border-light p-5" action="#!">
               <input
                 type="text"
                 id="defaultContactFormName"
-                class="form-control mb-4"
+                className="form-control mb-4"
                 placeholder="Name"
               />
 
               <input
                 type="email"
                 id="defaultContactFormEmail"
-                class="form-control mb-4"
+                className="form-control mb-4"
                 placeholder="E-mail"
               />
               <div class="form-group">
                 <textarea
-                  class="form-control rounded-0"
+                  className="form-control rounded-0"
                   id="exampleFormControlTextarea2"
                   rows="3"
                   placeholder="Message"
                 ></textarea>
               </div>
 
-              <button class="btn btn-info btn-block" type="submit" onClick={handleSubmit}>
+              <button className="btn btn-info btn-block" type="submit" onClick={handleSubmit}>
                 Send
               </button>
             </form>
