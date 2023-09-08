@@ -104,6 +104,7 @@ const Book = () => {
     // Check if the selected dates conflict with booked dates
     const isConflict = bookedDates.some((bookedDate) => {
       return (
+        // room._id === bookedDate.roomId &&
         selectedStartDate <= new Date(bookedDate.endDate) &&
         selectedEndDate >= new Date(bookedDate.startDate)
       );
@@ -111,7 +112,7 @@ const Book = () => {
 
     if (isConflict) {
       setIsDateAvailable(false);
-      return; // Don't proceed with booking
+      return; 
     }
 
     setBookingOptions(updatedBookingOptions);

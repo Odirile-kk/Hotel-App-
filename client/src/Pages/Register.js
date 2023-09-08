@@ -33,11 +33,11 @@ const navigate = useNavigate()
 
   return (
     <div className="register">
-      <div className="mask d-flex align-items-center gradient-custom-3">
-        <div className="container">
-          <div className="row d-flex justify-content-center align-items-center">
-            <div className="col-12 col-md-9 col-lg-7 col-xl-6">
-              <div className="card" style={{ borderRadius: "15px" }}>
+      <div >
+        <div className="container" >
+          <div className="row d-flex justify-content-center align-items-center" >
+            <div className="col-md-9 col-xl-6">
+              <div className="card" style={{ borderRadius: "15px", height: '100vh' }}>
                 <div className="card-body p-5">
                   <h2 className="text-uppercase text-center mb-5">
                     Create an account
@@ -83,8 +83,8 @@ const navigate = useNavigate()
                       </label>
                     </div>
 
- {/* Toggle isAdmin */}
- <div className="form-check d-flex justify-content-center mb-3">
+                     {/* Toggle isAdmin */}
+                   <div className="form-check d-flex justify-content-center mb-3">
                     <input
                       className="form-check-input me-2"
                       type="checkbox"

@@ -69,11 +69,11 @@ dispatch(deleteBooking(id))
               <h1 style={{ marginLeft: "5%", padding: "4%" }}>
                 R{booking.price}
               </h1>
-              {/* <button onClick={handleCancel} type="button" className="btn btn-danger" style={{
+              <button onClick={e => handleCancel(booking._id)} type="button" className="btn btn-danger" style={{
                 height: '10%',
                 marginTop: '10%',
                
-              }}>Cancel</button> */}
+              }}>Cancel</button>
               
             </div>
           ))}
