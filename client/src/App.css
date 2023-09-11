@@ -287,8 +287,12 @@ h1 {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      margin-left: 40%;
+      margin-left: 30%;
+   
+.utilText{
+  width: 180%;
 
+}
       .utils-left {
       }
       .utils-right {
@@ -312,7 +316,7 @@ h1 {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    width: 60%;
+    width: 40%;
   }
 
   .headerSearchText {
@@ -322,6 +326,7 @@ h1 {
   .date {
     position: absolute;
     top: 450px;
+    
   }
 
   .options {
@@ -330,6 +335,7 @@ h1 {
     background-color: #fff;
     color: gray;
     border-radius: 5px;
+    
   }
 
   .optionItem {
@@ -354,7 +360,7 @@ h1 {
   }
 
   .book-btn{
-   margin-left: 95%;
+   margin-left: 70%;
     margin-top: 4%;
     padding: 8px;
     border-radius: 10px;

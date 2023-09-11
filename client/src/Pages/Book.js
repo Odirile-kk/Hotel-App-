@@ -186,13 +186,13 @@ const Book = () => {
         <div className="utils-container">
           <div className="utils">
             <div className="utils-left">
-              <h6>{room.util} </h6>
-              <h6>{room.util3} </h6>
-              <h6>{room.util5} </h6>
+              <h6 className="utilText">{room.util} </h6>
+              <h6 className="utilText">{room.util3} </h6>
+              <h6 className="utilText">{room.util5} </h6>
             </div>
             <div className="utils-right">
-              <h6>{room.util2}</h6>
-              <h6>{room.util4} </h6>
+              <h6 className="utilText">{room.util2}</h6>
+              <h6 className="utilText">{room.util4} </h6>
             </div>
           </div>
 
