@@ -9,6 +9,7 @@ const initiatePayment = async (req, res) => {
   const params = JSON.stringify({
     email: email,
     amount: amount,
+ 
   });
 
   const options = {
