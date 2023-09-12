@@ -61,8 +61,6 @@ useEffect(() => {
       {/*Contact */}
       <section className="contact" id="contact">
       
-
-      
           <div className="contact-image">
             <img src={contact} alt="Image" />
           </div>

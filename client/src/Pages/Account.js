@@ -54,6 +54,7 @@ if (signedInUserData) {
     try {
      dispatch(updateUsers({ id, ...input }));
       console.log("posting", input);
+      alert('Account Updated')
       navigate("/");
     } catch (error) {
       console.error("Error updating user:", error);

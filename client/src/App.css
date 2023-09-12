@@ -18,6 +18,12 @@ section {
 
 .navbar-container {
   order: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100; /* Adjust this value as needed */
+  
   .navbar {
     /* Navbar background color */
     position: fixed;
@@ -413,7 +419,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 15px;
   }
 
   .flip-card-front {
@@ -422,7 +428,7 @@ h1 {
 
   .flip-card-back {
     background-color: #203f5b;
-    opacity: 0.6;
+    /* opacity: 0.6; */
     color: white;
     transform: rotateY(180deg);
   }
