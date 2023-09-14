@@ -45,6 +45,7 @@ useEffect(() => {
       </section>
 
       <section className="about" id="about">
+      {/* <h1>ABOUT</h1> */}
         <About />
       </section>
 

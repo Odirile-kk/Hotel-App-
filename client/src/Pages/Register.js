@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../Redux/authSlice";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -14,6 +15,23 @@ const navigate = useNavigate()
   const [isAdmin, setIsAdmin] = useState(false);
   const [secretCode, setSecretCode] = useState("");
 
+  // const handleRegister = () => {
+  //   const payload = isAdmin
+  //     ? { username, email, password, isAdmin, secretCode }
+  //     : { username, email, password };
+  
+  //   dispatch(registerUser(payload))
+  //     .then((action) => {
+  //       if (registerUser.fulfilled.match(action)) {
+         
+  //         toast.success('Registration successful! Redirecting to home page.');
+  //         navigate('/');
+  //       } else if (registerUser.rejected.match(action)) {
+  //         toast.error('Registration failed. Please try again.');
+  //       }
+  //     });
+  // };
+
   const handleRegister = () => {
     const payload = isAdmin
       ? { username, email, password, isAdmin, secretCode }
@@ -22,11 +40,22 @@ const navigate = useNavigate()
     dispatch(registerUser(payload))
       .then((action) => {
         if (registerUser.fulfilled.match(action)) {
-         
-          toast.success('Registration successful! Redirecting to home page.');
-          navigate('/');
+          Swal.fire({
+            icon: 'success',
+            title: 'Registration successful!',
+            text: 'Sign in to continue',
+            timer: 2000, 
+            showConfirmButton: false
+          }).then(() => {
+            navigate('/');
+          });
         } else if (registerUser.rejected.match(action)) {
-          toast.error('Registration failed. Please try again.');
+          Swal.fire({
+            icon: 'error',
+            title: 'Registration failed!',
+            text: 'Please try again.',
+            confirmButtonText: 'OK'
+          });
         }
       });
   };

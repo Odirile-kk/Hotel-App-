@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { postUsers} from '../Redux/authSlice';
 import { useNavigate } from "react-router-dom";
+import MySwal from 'sweetalert2';
 
 
 const SignUp = ({ isOpen, onClose }) => {
@@ -12,21 +13,30 @@ const SignUp = ({ isOpen, onClose }) => {
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
  
-  const handleSubmit = async (e) => {
+   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(postUsers({email, password}))
-    
-    .then((action) => {
-      if (postUsers.fulfilled.match(action)) {
-        alert('Login successful! Redirecting to home page.');
-        window.location.reload()
-        nav('/');
-      } else if (postUsers.rejected.match(action)) {
-        alert('Login failed. Please try again.');
-      }
-    });
-    
+    dispatch(postUsers({ email, password }))
+      .then((action) => {
+        if (postUsers.fulfilled.match(action)) {
+          MySwal.fire({
+            title: 'Login successful!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          }).then(() => {
+            window.location.reload();
+            window.location.href = '/';
+          });
+        } else if (postUsers.rejected.match(action)) {
+          MySwal.fire({
+            title: 'Login failed',
+            text: 'Please try again.',
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+        }
+      });
   };
+  
 
 
   return (

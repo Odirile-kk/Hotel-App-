@@ -55,10 +55,10 @@ const Book = () => {
     rooms: 1,
   });
 
-  const [isDateAvailable, setIsDateAvailable] = useState(true); // Indicator for date availability
+  const [isDateAvailable, setIsDateAvailable] = useState(true); 
  
   useEffect(() => {
-    dispatch(fetchRooms()); // Fetch all rooms if needed
+    dispatch(fetchRooms()); 
     console.log('this the room title :', signedInUser)
   }, [dispatch]);
 
@@ -76,8 +76,10 @@ const Book = () => {
 //fetch booking info
   const fetchBookedDates = async () => {
     try {
-      const response = await dispatch(getBookingOptions()); // Dispatch the async thunk
-      return response.payload; // Assuming booked dates are returned in this format
+      const response = await dispatch(getBookingOptions()); 
+      // console.log('booking dates : ', response.payload)
+      return response.payload;
+      
     } catch (error) {
       console.error("Error fetching booked dates:", error);
       return [];
@@ -123,10 +125,10 @@ const Book = () => {
     dispatch(postBookingOptions(updatedBookingOptions));
 
     console.log(totalPrice);
-    // console.log("book clicked");
+    console.log("book clicked");
 
     if (isAuthenticated) {
-      navigate("/payment", { state: { totalPrice, numberOfDays } }); // Navigate to payment page
+      navigate("/payment", { state: { totalPrice, numberOfDays } }); 
     } else {
       alert('Please login or Sign Up to continue')
     }

@@ -11,7 +11,8 @@ const bookingSchema = new mongoose.Schema({
     rooms: Number,
     roomName: String,
     price: Number,
-    user: String
+    user: String,
+    image: String
   });
   
 export default mongoose.model('Booking', bookingSchema);

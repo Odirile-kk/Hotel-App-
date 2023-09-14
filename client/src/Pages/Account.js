@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { updateUsers, getUsers } from "../Redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
+import Swal from 'sweetalert2';
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const Account = () => {
  //retrieve token from local storage and assign it to signInUser
   const signedInUser = localStorage.getItem('userDetails')
 
-  //using the details associated with the token, find the userid that matches the one generated when use logged in
+  //finding the signed in user using the token
   const getUserById = (userId) => {
     return users.find((user) => user._id === userId);
   };
@@ -50,14 +51,26 @@ if (signedInUserData) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-     dispatch(updateUsers({ id, ...input }));
+      dispatch(updateUsers({ id, ...input }));
       console.log("posting", input);
-      alert('Account Updated')
+      
+      await Swal.fire({
+        icon: 'success',
+        title: 'Account Updated',
+        showConfirmButton: false,
+        timer: 1500, 
+      });
+  
       navigate("/");
     } catch (error) {
       console.error("Error updating user:", error);
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error Updating User',
+        text: 'An error occurred while updating the user.',
+      });
     }
   };
 

@@ -88,19 +88,19 @@ console.log('in the profile', details)
         </button>
         <ul className={`navbar-nav ${isMenuOpen ? "open" : ""}`}>
           <li>
-            <a href="#about">About</a>
+            <a href="/#about">About</a>
           </li>
           <li>
-            <a href="#rooms">Rooms</a>
+            <a href="/#rooms">Rooms</a>
           </li>
           <li>
-            <a href="#amenities">Amenities</a>
+            <a href="/#amenities">Amenities</a>
           </li>
           <li>
             <a href="gallery">Gallery</a>
           </li>
           <li>
-            <a href="#contact">Contact</a>
+            <a href="/#contact">Contact</a>
           </li>
           <div>
             {token ? (

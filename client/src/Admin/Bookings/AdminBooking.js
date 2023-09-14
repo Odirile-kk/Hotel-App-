@@ -38,8 +38,8 @@ const AdminBooking = () => {
                                 <thead>
                                     <tr>
                                         <th scope="col" >#</th>
-                                        <th scope="col">Username</th>
-                                        <th scope="col">Email</th>
+                                        {/* <th scope="col">Username</th>
+                                        <th scope="col">Email</th> */}
                                         <th scope="col">Check-in</th>
                                         <th scope="col">Check-out</th>
                                         <th scope="col">No. of adults</th>
@@ -52,8 +52,8 @@ const AdminBooking = () => {
                                     {book.map((booking) => (
                                         <tr key={booking._id}>
                                             <th scope="row">{booking._id}</th>
-                                            <td>{booking.name}</td>
-                                            <td>{booking.email}</td>
+                                            {/* <td>{booking.name}</td>
+                                            <td>{booking.email}</td> */}
                                             <td>{booking.startDate}</td>
                                             <td>{booking.endDate}</td>
                                             <td>{booking.adults}</td>
