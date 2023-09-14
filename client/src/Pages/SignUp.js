@@ -35,7 +35,7 @@ const SignUp = ({ isOpen, onClose }) => {
         <span className="close" onClick={onClose}>
           &times;
         </span>
-        <h2>Sign Up</h2>
+        <h2>Sign In</h2>
         <form style={{marginTop: '8px'}}>
           <div class="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">

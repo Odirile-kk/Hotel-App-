@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import abtPic from "../assets/pexels-kindel-media-7294585.jpg";
 import deluxe from "../assets/Deluxe.png";
 import Navbar from "./Navbar";
 import About from "../Pages/About";
@@ -32,6 +31,8 @@ useEffect(() => {
 
       {/*Header */}
       <section className="home" id="home">
+     
+      
       <div className={`logo ${fadeIn ? 'fade-in' : ''}`}>
       <img src={deluxe} alt='' width={450} height={450}/>
       </div>
@@ -40,6 +41,7 @@ useEffect(() => {
        
           <button className="link-btn"><a href="#rooms">Book Now</a></button>
         </div>
+        
       </section>
 
       <section className="about" id="about">

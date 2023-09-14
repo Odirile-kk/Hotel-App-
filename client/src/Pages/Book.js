@@ -21,9 +21,12 @@ const Book = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
+
+
   const { rooms, loading, error } = useSelector((state) => state.rooms);
   // Find the specific room with the provided ID
   const room = rooms.find((room) => room._id === id);
+  // console.log('room image: ',room.image)
 
   //find user
   const { users } = useSelector((state) => state.users);
@@ -66,7 +69,8 @@ const Book = () => {
     children: "",
     rooms: "",
     roomName: "",
-    price: ""
+    price: "",
+    image: ""
   });
 
 //fetch booking info
@@ -87,7 +91,7 @@ const Book = () => {
     const numberOfDays = differenceInDays(selectedEndDate, selectedStartDate);
     const totalPrice = numberOfDays * room.price; 
 
-    const bookedDates = await fetchBookedDates(); // Fetch booked dates using the async thunk
+    const bookedDates = await fetchBookedDates(); 
 
     const updatedBookingOptions = {
       startDate: selectedStartDate,
@@ -97,8 +101,8 @@ const Book = () => {
       rooms: options.rooms,
       roomName: room.title,
       price: totalPrice,
-      user: signedInUserData
-      
+      user: signedInUserData,
+      image: room.image
     };
 
     // Check if the selected dates conflict with booked dates
@@ -186,6 +190,7 @@ const Book = () => {
         <div className="utils-container">
           <div className="utils">
             <div className="utils-left">
+            
               <h6 className="utilText">{room.util} </h6>
               <h6 className="utilText">{room.util3} </h6>
               <h6 className="utilText">{room.util5} </h6>

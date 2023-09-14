@@ -18,19 +18,20 @@ const Rooms = () => {
   
 
   return (
-    <div style={{ display: "flex", flexDirection: "row" }}>
+    <div >
         {/* <button onClick={() => handleScroll("left")}></button> */}
       <div class="cards-wrapper">
       
         {rooms.map((room) => (
-          <div className="card" key={room._id}>
+          <div className="card" key={room._id} style={{}}>
             <img src={room.image} className="card-img-top" alt="" />
             <div className="card-body">
-              <h5 className="card-title">{room.title}</h5>
+              <h2 className="card-title">{room.title}</h2>
               <h4>
-                R {room.price} /night <BsPersonFill />
-                {room.maxPeople}
+                R{room.price} /night 
               </h4>
+              <h6><BsPersonFill />
+                {room.maxPeople}</h6>
               <p className="card-text"> {room.desc}</p>
               <Link
                 to={`/room/${room._id}`}

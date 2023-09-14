@@ -50,7 +50,7 @@ dispatch(deleteBooking(id))
           {userBooking.map((booking) => (
             <div className="booking-list" key={booking._id}>
               <img
-                src={room}
+                src={booking.image}
                 width={200}
                 height={200}
                 style={{ marginTop: "2%", borderRadius: "10px" }}
