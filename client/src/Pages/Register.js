@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { registerUser } from "../Redux/authSlice";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
+import Navbar from "../components/Navbar";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -14,23 +15,6 @@ const navigate = useNavigate()
   const [password, setPassword] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [secretCode, setSecretCode] = useState("");
-
-  // const handleRegister = () => {
-  //   const payload = isAdmin
-  //     ? { username, email, password, isAdmin, secretCode }
-  //     : { username, email, password };
-  
-  //   dispatch(registerUser(payload))
-  //     .then((action) => {
-  //       if (registerUser.fulfilled.match(action)) {
-         
-  //         toast.success('Registration successful! Redirecting to home page.');
-  //         navigate('/');
-  //       } else if (registerUser.rejected.match(action)) {
-  //         toast.error('Registration failed. Please try again.');
-  //       }
-  //     });
-  // };
 
   const handleRegister = () => {
     const payload = isAdmin
@@ -61,12 +45,17 @@ const navigate = useNavigate()
   };
 
   return (
-    <div className="register">
+    <>
+<div className="navbar-container">
+        <Navbar />
+      </div>
+
+<div className="register">
       <div >
         <div className="container" >
           <div className="row d-flex justify-content-center align-items-center" >
-            <div className="col-md-9 col-xl-6">
-              <div className="card" style={{ borderRadius: "15px", height: '100vh' }}>
+            <div className="col-md-9 col-xl-6" style={{padding: '2%', marginTop: '2%', overflow: 'hidden'}}>
+              <div className="card" style={{ borderRadius: "15px", height: '90vh' }}>
                 <div className="card-body p-5">
                   <h2 className="text-uppercase text-center mb-5">
                     Create an account
@@ -181,6 +170,8 @@ const navigate = useNavigate()
         </div>
       </div>
     </div>
+    </>
+    
   );
 };
 
