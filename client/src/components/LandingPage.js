@@ -132,15 +132,15 @@ useEffect(() => {
               <div className="icons-container">
               <Link to='/terms'>Terms of service</Link>
               <div className="social-icons">
-                <a href="#">
+                <Link to="https://www.facebook.com/">
                   <BsFacebook size={40} color="white"/>
-                </a>
-                <a href="#">
+                </Link>
+                <Link to="https://twitter.com/">
                   <BsTwitter size={40} color="white"/>
-                </a>
-                <a href="#">
+                </Link>
+                <Link to="https://www.instagram.com/">
                   <BsInstagram size={40} color="white"/>
-                </a>
+                </Link>
                
               </div>
               <p className="copyright">De luxe blu © 2018</p>

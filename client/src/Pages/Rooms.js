@@ -35,8 +35,8 @@ const Rooms = () => {
               <p className="card-text"> {room.desc}</p>
               <Link
                 to={`/room/${room._id}`}
-                className="btn btn-primary"
-                style={{ marginLeft: "40%" }}
+                // className="btn btn-primary"
+                style={{ marginLeft: "40%", backgroundColor: '#203f5b', color: 'white', padding: '2%', borderRadius: '25%'}}
               >
                 Book
               </Link>
