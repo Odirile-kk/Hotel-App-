@@ -785,6 +785,21 @@ margin-top: 6%;
   }
 }
 
-.register {
 
-}
+  .adminNavbar {
+    background-color: #203f5b;
+    color: #fff;
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .adminNavbar h2 {
+      /* margin: 0; */
+      font-size: 24px;
+    }
+  
+  
+  }
+  
+  

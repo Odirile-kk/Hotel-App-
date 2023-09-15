@@ -79,6 +79,7 @@ if (signedInUserData) {
       <div className="navbar-container">
         <Navbar />
       </div>
+     
       <div className="account">
         <div className="card-container">
           <div>

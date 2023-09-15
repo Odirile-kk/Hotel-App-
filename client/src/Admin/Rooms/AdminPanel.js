@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRooms, deleteRoom} from "../../Redux/roomSlice";
+import { fetchRooms, deleteRoom } from "../../Redux/roomSlice";
 import Sidebar from "../Sidebar";
 
 const AdminPanel = () => {
@@ -13,9 +13,9 @@ const AdminPanel = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    dispatch(deleteRoom(id))
-    dispatch(fetchRooms())
-  }
+    dispatch(deleteRoom(id));
+    dispatch(fetchRooms());
+  };
 
   return (
     <>
@@ -24,13 +24,25 @@ const AdminPanel = () => {
           <Sidebar />
         </div>
 
-        <div id="page-content-wrapper" >
-          <div className="container-fluid px-4" style={{ marginTop: '10%'}}>
-            <div className="row my-5">
+        <div
+          id="page-content-wrapper"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+            width: "100vw",
+          }}
+        >
+          <div className="container-fluid px-4" style={{ marginTop: "-2%" }}>
+            <div className="adminNavbar">
               <h3 className="fs-4 mb-3">Rooms</h3>
               <Link to={"/addRooms"}>
                 <button>Add Room</button>
               </Link>
+            </div>
+
+            <div className="row my-5">
               <div
                 className="col"
                 style={{ boxShadow: "2px 2px 10px 0 rgba(22, 22, 26, 0.22)" }}
@@ -38,14 +50,12 @@ const AdminPanel = () => {
                 <table className="table bg-white rounded shadow-sm  table-hover">
                   <thead>
                     <tr>
-                      <th scope="col">
-                        #
-                      </th>
+                      <th scope="col">#</th>
                       <th scope="col"></th>
                       <th scope="col">Room no.</th>
                       <th scope="col">Name</th>
                       <th scope="col">Price</th>
-                      <th scope="col" >Description</th>
+                      <th scope="col">Description</th>
                       <th scope="col">Description</th>
                     </tr>
                   </thead>
@@ -54,15 +64,23 @@ const AdminPanel = () => {
                       <tr key={room._id}>
                         <th scope="row"></th>
                         <td>
-                        <img src={room.image} width={90} height={90} /></td>
+                          <img src={room.image} width={90} height={90} />
+                        </td>
                         <td>{room.roomNumber}</td>
                         <td>{room.title}</td>
                         <td>{room.price}</td>
                         <td>{room.desc}</td>
                         <td>
-                          <button><Link to={`/adminUpdate/${room._id}`}>Update</Link></button>
+                          <button>
+                            <Link to={`/adminUpdate/${room._id}`}>Update</Link>
+                          </button>
                           <br />
-                          <button onClick={e => handleDelete(room._id)} class="btn btn-danger">Delete</button>
+                          <button
+                            onClick={(e) => handleDelete(room._id)}
+                            class="btn btn-danger"
+                          >
+                            Delete
+                          </button>
                         </td>
                       </tr>
                     ))}

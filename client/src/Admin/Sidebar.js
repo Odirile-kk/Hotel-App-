@@ -1,39 +1,57 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {
+  FaUserSecret,
+  FaBed,
+  FaPaperclip,
+  FaPowerOff,
+  FaHome,
+  FaUser,
+} from "react-icons/fa";
+
 
 const Sidebar = () => {
   return (
-    <div>
-      <div className="bg-white" id="sidebar-wrapper">
+    <div >
+      <div id="sidebar-wrapper" style={{height: '100vh', backgroundColor: '#203f5b'}}>
         <div className="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
-          <i className="fas fa-user-secret me-2"></i>Admin Dashboard
+          Admin Dashboard
         </div>
 
-        <div className="list-group list-group-flush my-3" style={{padding: '10%', paddingTop:'30%'}}>
-          <Link to='/adminpanel'
-        
+        <div
+          className="list-group list-group-flush my-3"
+          style={{ padding: "10%", paddingTop: "30%" }}
+        >
+          <Link
+            to="/adminpanel"
             className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
           >
-            <i className="fas fa-chart-line me-2"></i>Rooms
+            <FaHome /> Home
           </Link>
-          <Link to={'/adminBookings'}
-        
+          <Link
+            to="/adminpanel"
             className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
           >
-            <i className="fas fa-paperclip me-2"></i>Bookings
+            <FaBed /> Rooms
           </Link>
-          <Link to={'/adminUsers'}
-        
+          <Link
+            to={"/adminBookings"}
             className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
           >
-            <i className="fas fa-shopping-cart me-2"></i>Users
+            <FaPaperclip /> Bookings
+          </Link>
+          <Link
+            to={"/adminUsers"}
+            className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
+          >
+            <FaUser /> Users
           </Link>
 
-          <Link to={'/adminLogout'}
-        
+          <Link
+            to={"/adminLogout"}
             className="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
           >
-            <i className="fas fa-power-off me-2"></i>Logout
+            <FaPowerOff /> Logout
           </Link>
         </div>
       </div>

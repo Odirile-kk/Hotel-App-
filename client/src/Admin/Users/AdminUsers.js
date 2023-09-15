@@ -43,11 +43,10 @@ const AdminUsers = () => {
           style={{
             marginTop: "-12%",
             // marginLeft: "4%",
-
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center", 
-            height: "90vh",
+            // display: "flex",
+            // justifyContent: "center",
+            // alignItems: "center", 
+            // height: "90vh",
           }}
         >
           
