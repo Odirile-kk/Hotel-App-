@@ -1,23 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  FaUserSecret,
   FaBed,
   FaPaperclip,
   FaPowerOff,
   FaHome,
   FaUser,
 } from "react-icons/fa";
+import logo from "../assets/deluxesmall.png"
 
 
 const Sidebar = () => {
   return (
     <div >
       <div id="sidebar-wrapper" style={{height: '100vh', backgroundColor: '#203f5b'}}>
+      <img src={logo} width={100} height={100} style={{backgroundColor: 'gray', borderRadius: '50%'}}/>
         <div className="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
+       
           Admin Dashboard
         </div>
-
+        
         <div
           className="list-group list-group-flush my-3"
           style={{ padding: "10%", paddingTop: "30%" }}
@@ -39,7 +41,7 @@ const Sidebar = () => {
             className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
           >
             <FaPaperclip /> Bookings
-          </Link>
+          </Link> 
           <Link
             to={"/adminUsers"}
             className="list-group-item list-group-item-action bg-transparent second-text fw-bold"

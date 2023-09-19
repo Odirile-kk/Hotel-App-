@@ -6,6 +6,7 @@ import About from "../Pages/About";
 import Amenities from "../Pages/Amenities";
 import Rooms from "../Pages/Rooms";
 import {BsFacebook, BsTwitter, BsInstagram} from 'react-icons/bs'
+import {MdLocationOn, MdCall, MdOutlineEmail} from 'react-icons/md'
 import contact from '../assets/pexels-thorsten-technoman-338504.jpg'
 
 const LandingPage = () => {
@@ -106,10 +107,11 @@ useEffect(() => {
 
         <div className="footer-clean">
           <footer>
-            <div className="container">
+            <div className="footer-container">
               <div className="row justify-content-center">
                 <div className="col-sm-4 col-md-3 item">
-                  <h3>Address</h3>
+                  {/* <h3>Address</h3> */}
+                  <MdLocationOn size={25} style={{marginLeft: '11%'}}/>
                   <p>
                     209 Aramis Ave
                     <br />
@@ -121,11 +123,13 @@ useEffect(() => {
                   </p>
                 </div>
                 <div className="col-sm-4 col-md-3 item">
-                  <h3>Contact</h3>
+                  {/* <h3>Contact</h3> */}
+                  <MdCall size={25} style={{marginLeft: '11%'}}/>
                   <p>(011) 834-7699</p>
                 </div>
                 <div className="col-sm-4 col-md-3 item">
-                  <h3>Email</h3>
+                  {/* <h3>Email</h3> */}
+                  <MdOutlineEmail size={25} style={{marginLeft: '11%'}}/>
                   <p>deluxeblu@info.com</p>
                 </div>
               </div>

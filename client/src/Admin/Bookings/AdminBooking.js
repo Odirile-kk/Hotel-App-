@@ -71,8 +71,8 @@ const AdminBooking = () => {
                       <th scope="row">{booking._id}</th>
                       {/* <td>{booking.name}</td>
                                             <td>{booking.email}</td> */}
-                      <td>{booking.startDate}</td>
-                      <td>{booking.endDate}</td>
+                      <td>{booking.startDate.split("T")[0]}</td>
+                      <td>{booking.endDate.split("T")[0]}</td>
                       <td>{booking.adults}</td>
                       <td>{booking.children}</td>
                       <td>{booking.rooms}</td>

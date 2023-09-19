@@ -33,7 +33,7 @@ const Book = () => {
  //retrieve token from local storage and assign it to signInUser
   const signedInUser = localStorage.getItem('userDetails')
 
-  //using the details associated with the token, find the userid that matches the one generated when use logged in
+  //find the userid that matches the one generated when use logged in
   const getUserById = (userId) => {
     return users.find((user) => user._id === userId);
   };
@@ -144,9 +144,11 @@ const Book = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loader-container">
+    <div className="loader"></div>
+  </div>
+ 
   }
-
   if (error) {
     return <div>Error: {error}</div>;
   }

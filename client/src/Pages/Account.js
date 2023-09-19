@@ -3,25 +3,23 @@ import { useNavigate } from "react-router-dom";
 import { updateUsers, getUsers } from "../Redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 const Account = () => {
   const dispatch = useDispatch();
-
   const { users } = useSelector((state) => state.users);
-  
-  const navigate = useNavigate();
- //retrieve token from local storage and assign it to signInUser
-  const signedInUser = localStorage.getItem('userDetails')
 
-  //finding the signed in user using the token
+  const navigate = useNavigate();
+
   const getUserById = (userId) => {
     return users.find((user) => user._id === userId);
   };
 
+  const signedInUser = localStorage.getItem("userDetails");
   const signedInUserData = getUserById(signedInUser);
-  
-// console.log('this is the signed in user', signedInUserData)
+
+  const id = signedInUserData ? signedInUserData._id : null;
+  const isAdmin = signedInUserData ? signedInUserData.isAdmin : false;
 
   const [input, setInput] = useState({
     username: "",
@@ -31,55 +29,71 @@ const Account = () => {
     number: "",
   });
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await dispatch(getUsers());
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        setLoading(false);
+      }
+    };
 
-    dispatch(getUsers())
-
-if (signedInUserData) {
-  setInput({
-    username: signedInUserData.username || "",
-    email: signedInUserData.email || "",
-    surname: signedInUserData.surname || "",
-    name: signedInUserData.name || "",
-    number: signedInUserData.number || "",
-  });
-  console.log('signed in user :', signedInUserData._id);
-}
-  },[]);
-  
-  const id = signedInUserData ? signedInUserData._id : null;
+    if (!signedInUserData) {
+      fetchData();
+    } else {
+      setLoading(false);
+      setInput({
+        username: signedInUserData.username,
+        email: signedInUserData.email,
+        surname: signedInUserData.surname,
+        name: signedInUserData.name,
+        number: signedInUserData.number,
+      });
+    }
+  }, [dispatch, signedInUserData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
-      dispatch(updateUsers({ id, ...input }));
+      await dispatch(updateUsers({ id, ...input }));
       console.log("posting", input);
-      
+
       await Swal.fire({
-        icon: 'success',
-        title: 'Account Updated',
+        icon: "success",
+        title: "Account Updated",
         showConfirmButton: false,
-        timer: 1500, 
+        timer: 1500,
       });
-  
+
       navigate("/");
     } catch (error) {
       console.error("Error updating user:", error);
       await Swal.fire({
-        icon: 'error',
-        title: 'Error Updating User',
-        text: 'An error occurred while updating the user.',
+        icon: "error",
+        title: "Error Updating User",
+        text: "An error occurred while updating the user.",
       });
     }
   };
 
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <div className="loader"></div>
+      </div>
+    );
+  }
   return (
     <>
       <div className="navbar-container">
         <Navbar />
       </div>
-     
+
       <div className="account">
         <div className="card-container">
           <div>
@@ -180,6 +194,15 @@ if (signedInUserData) {
                       >
                         Save changes
                       </button>
+                      {isAdmin && (
+                        <button
+                          onClick={() => navigate.navigate("/adminpanel")}
+                          className="btn btn-secondary"
+                          type="button"
+                        >
+                          Admin
+                        </button>
+                      )}
                     </form>
                   </div>
                 </div>
