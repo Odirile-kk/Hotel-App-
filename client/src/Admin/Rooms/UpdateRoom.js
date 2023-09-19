@@ -44,7 +44,12 @@ const AddRooms = () => {
     }
 
     return (
-        <div>
+        <div style={{
+            padding: '10%',
+            width: '60%',
+            marginLeft: '20%'
+        }}>
+        <h3>Update User</h3>
             <form>
                 <div className="form-group">
                     <label htmlFor="formGroupExampleInput">Title</label>
@@ -103,7 +108,7 @@ const AddRooms = () => {
                     />
                 </div>
 
-                <button           style={{marginLeft: '40%', padding: '2%', borderRadius: '10px', backgroundColor: 'blue', marginTop: '5%'}}  onClick={handleSubmit}><Link to={'/'}>Submit</Link></button>
+                <button style={{marginLeft: '40%', padding: '2%', borderRadius: '10px', backgroundColor: 'blue', marginTop: '5%'}}  onClick={handleSubmit} ><Link to={'/'}>Submit</Link></button>
             </form>
         </div>
     );

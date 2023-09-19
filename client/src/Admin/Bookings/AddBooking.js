@@ -14,7 +14,7 @@ const dispatch = useDispatch()
 const nav = useNavigate()
 
   const [input, setInput] = useState({
-    name: "",
+    roomName: "",
     email: "",
     adults: "",
     children: "",
@@ -37,7 +37,7 @@ const nav = useNavigate()
   
     const updatedBookingOptions = {
 
-      name: input.name,
+      roomName: input.roomName,
       email: input.email,
       startDate: selectedStartDate,
       endDate: selectedEndDate,
@@ -54,7 +54,13 @@ const nav = useNavigate()
 
 
   return (
-    <div>
+    <div 
+    style={{
+      padding: '10%',
+      width: '60%',
+      marginLeft: '20%'
+  }}
+    >
       <form>
         <div className="form-group">
           <label htmlFor="formGroupExampleInput">Name</label>
@@ -64,17 +70,6 @@ const nav = useNavigate()
             id="formGroupExampleInput"
        
             onChange={e => setInput({ ...input, name: e.target.value })}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="formGroupExampleInput2">Email</label>
-          <input
-            type="text"
-            className="form-control"
-            id="formGroupExampleInput2"
-
-            onChange={e => setInput({ ...input, email: e.target.value })}
           />
         </div>
         

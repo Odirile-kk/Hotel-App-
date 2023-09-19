@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRooms, deleteRoom } from "../../Redux/roomSlice";
 import Sidebar from "../Sidebar";
+import {BiSolidAddToQueue, BiSolidEditAlt, BiTrash} from 'react-icons/bi'
 
 const AdminPanel = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const AdminPanel = () => {
 
   return (
     <>
-      <div className="d-flex" id="wrapper">
+      <div className="d-flex" >
         <div>
           <Sidebar />
         </div>
@@ -34,11 +35,11 @@ const AdminPanel = () => {
             width: "100vw",
           }}
         >
-          <div className="container-fluid px-4" style={{ marginTop: "-2%" }}>
+          <div className="container-fluid px-4">
             <div className="adminNavbar">
-              <h3 className="fs-4 mb-3">Rooms</h3>
+              <h3>Rooms</h3>
               <Link to={"/addRooms"}>
-                <button>Add Room</button>
+                <BiSolidAddToQueue size={30} color="white"/>
               </Link>
             </div>
 
@@ -71,15 +72,15 @@ const AdminPanel = () => {
                         <td>{room.price}</td>
                         <td>{room.desc}</td>
                         <td>
-                          <button>
-                            <Link to={`/adminUpdate/${room._id}`}>Update</Link>
-                          </button>
+                        
+                            <Link to={`/adminUpdate/${room._id}`}><BiSolidEditAlt size={20} color="green"/></Link>
+                          
                           <br />
                           <button
                             onClick={(e) => handleDelete(room._id)}
-                            class="btn btn-danger"
+                            
                           >
-                            Delete
+                           <BiTrash size={20} color="red"/>
                           </button>
                         </td>
                       </tr>

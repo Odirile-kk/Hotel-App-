@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {createRoom} from '../../Redux/roomSlice'
+import { createRoom } from "../../Redux/roomSlice";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
-
 const AddRooms = () => {
-const dispatch = useDispatch()
-const nav = useNavigate()
+  const dispatch = useDispatch();
+  const nav = useNavigate();
 
   const [input, setInput] = useState({
     title: "",
@@ -25,36 +24,59 @@ const nav = useNavigate()
     util2: "",
     util3: "",
     util4: "",
-    util5: ""
-  })
+    util5: "",
+  });
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const image = reader.result;
+        setInput((inputVal) => ({
+          ...inputVal,
+          image: image,
+        }));
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const data = await axios.post('http://localhost:3000/api/rooms/', input)
-      .then(res => {
-        alert('Room added')
-      })
-  
-  }
-
+    const data = await axios
+      .post("http://localhost:3000/api/rooms/", input)
+      .then((res) => {
+        alert("Room added");
+      });
+  };
 
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      // marginTop: '10%',
-    }}>
-      <form style={{
-        width: '40%'
-      }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        // backgroundColor: 'pink',
+        marginTop: "10%",
+      }}
+    >
+      <form
+        style={{
+          width: "40%",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+        }}
+      >
         <div className="form-group">
           <label htmlFor="formGroupExampleInput">Title</label>
           <input
             type="text"
             className="form-control"
-           
-            onChange={e => setInput({ ...input, title: e.target.value })}
+            onChange={(e) => setInput({ ...input, title: e.target.value })}
           />
         </div>
 
@@ -63,8 +85,7 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-           
-            onChange={e => setInput({ ...input, price: e.target.value })}
+            onChange={(e) => setInput({ ...input, price: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -72,8 +93,7 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-          
-            onChange={e => setInput({ ...input, maxPeople: e.target.value })}
+            onChange={(e) => setInput({ ...input, maxPeople: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -81,8 +101,7 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-           
-            onChange={e => setInput({ ...input, desc: e.target.value })}
+            onChange={(e) => setInput({ ...input, desc: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -90,27 +109,16 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-        
-            onChange={e => setInput({ ...input, roomNumber: e.target.value })}
+            onChange={(e) => setInput({ ...input, roomNumber: e.target.value })}
           />
         </div>
-
-        <div className="form-group">
-          <label htmlFor="formGroupExampleInput2">Image</label>
+        <div>
+          <label class="form-label">Cover Image</label>
           <input
-            type="text"
-            className="form-control"
-        
-            onChange={e => setInput({ ...input, image: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="formGroupExampleInput2">Image</label>
-          <input
-            type="text"
-            className="form-control"
-        
-            onChange={e => setInput({ ...input, image1: e.target.value })}
+            type="file"
+            accept="image/*"
+            id="image"
+            onChange={handleImageUpload}
           />
         </div>
         <div className="form-group">
@@ -118,8 +126,7 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-        
-            onChange={e => setInput({ ...input, image2: e.target.value })}
+            onChange={(e) => setInput({ ...input, image1: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -127,8 +134,7 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-        
-            onChange={e => setInput({ ...input, image3: e.target.value })}
+            onChange={(e) => setInput({ ...input, image2: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -136,8 +142,15 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-        
-            onChange={e => setInput({ ...input, image4: e.target.value })}
+            onChange={(e) => setInput({ ...input, image3: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="formGroupExampleInput2">Image</label>
+          <input
+            type="text"
+            className="form-control"
+            onChange={(e) => setInput({ ...input, image4: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -145,8 +158,7 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-        
-            onChange={e => setInput({ ...input, util5: e.target.value })}
+            onChange={(e) => setInput({ ...input, util5: e.target.value })}
           />
         </div>
 
@@ -155,8 +167,7 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-        
-            onChange={e => setInput({ ...input, util: e.target.value })}
+            onChange={(e) => setInput({ ...input, util: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -164,8 +175,7 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-        
-            onChange={e => setInput({ ...input, util1: e.target.value })}
+            onChange={(e) => setInput({ ...input, util1: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -173,8 +183,7 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-        
-            onChange={e => setInput({ ...input, util2: e.target.value })}
+            onChange={(e) => setInput({ ...input, util2: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -182,8 +191,7 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-        
-            onChange={e => setInput({ ...input, util3: e.target.value })}
+            onChange={(e) => setInput({ ...input, util3: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -191,12 +199,27 @@ const nav = useNavigate()
           <input
             type="text"
             className="form-control"
-        
-            onChange={e => setInput({ ...input, util4: e.target.value })}
+            onChange={(e) => setInput({ ...input, util4: e.target.value })}
           />
         </div>
 
-        <button style={{marginLeft: '40%', padding: '2%', borderRadius: '10px', backgroundColor: 'blue', marginTop: '5%'}} onClick={handleSubmit}><Link to={'/adminpanel'} style={{textDecoration: 'none', color: 'white'}}>Submit</Link></button>
+        <button
+          style={{
+            marginLeft: "40%",
+            padding: "2%",
+            borderRadius: "10px",
+            backgroundColor: "blue",
+            marginTop: "5%",
+          }}
+          onClick={handleSubmit}
+        >
+          <Link
+            to={"/adminpanel"}
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            Submit
+          </Link>
+        </button>
       </form>
     </div>
   );

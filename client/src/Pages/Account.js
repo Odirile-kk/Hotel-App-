@@ -196,7 +196,7 @@ const Account = () => {
                       </button>
                       {isAdmin && (
                         <button
-                          onClick={() => navigate.navigate("/adminpanel")}
+                          onClick={() => navigate("/adminpanel")}
                           className="btn btn-secondary"
                           type="button"
                         >

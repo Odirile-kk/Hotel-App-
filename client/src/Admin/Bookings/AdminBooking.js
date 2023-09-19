@@ -3,6 +3,7 @@ import Sidebar from "../Sidebar";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getBookingOptions, deleteBooking } from "../../Redux/bookSlice";
+import {BiBookAdd, BiSolidEditAlt, BiTrash} from 'react-icons/bi'
 
 const AdminBooking = () => {
   const dispatch = useDispatch();
@@ -38,12 +39,12 @@ const AdminBooking = () => {
       >
       
      
-        <div className="container-fluid px-4" style={{ marginTop: "-12%" }}>
+        <div className="container-fluid px-4" >
         <div className="adminNavbar">
-          <h3 className="fs-4 mb-3">Bookings</h3>
-          <button>
-            <Link to={"/addbooking"}>Make a booking</Link>
-          </button>
+          <h3>Bookings</h3>
+          
+            <Link to={"/addbooking"}><BiBookAdd size={30} color="white"/></Link>
+         
           </div>
           <div className="row my-5">
            
@@ -77,13 +78,13 @@ const AdminBooking = () => {
                       <td>{booking.children}</td>
                       <td>{booking.rooms}</td>
                       <td>
-                        <button>
+                    
                           <Link to={`/updateBooking/${booking._id}`}>
-                            Update
+                           <BiSolidEditAlt size={20} color="green"/>
                           </Link>
-                        </button>
+                      
                         <button onClick={(e) => handleDelete(booking._id)}>
-                          delete
+                          <BiTrash size={20} color="red" />
                         </button>
                       </td>
                     </tr>

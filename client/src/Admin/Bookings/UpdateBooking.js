@@ -23,7 +23,7 @@ const { id } = useParams();
     useEffect(() => {
         if (booking) {
             setInput({
-                name: booking.name || "",
+              roomName: booking.roomName || "",
                 email: booking.email || "",
                 adults: booking.adults || "",
                 children: booking.children || "",
@@ -34,7 +34,7 @@ const { id } = useParams();
     }, [booking]);
 
   const [input, setInput] = useState({
-    name: "",
+    roomName: "",
     email: "",
     adults: "",
     children: "",
@@ -58,7 +58,7 @@ const { id } = useParams();
       const selectedEndDate = date[0].endDate;
   
       const updatedBookingOptions = {
-        name: input.name,
+        roomName: input.roomName,
         email: input.email,
         startDate: selectedStartDate,
         endDate: selectedEndDate,
@@ -77,30 +77,23 @@ const { id } = useParams();
   
 
   return (
-    <div>
+    <div style={{
+      padding: '10%',
+      width: '60%',
+      marginLeft: '20%'
+  }}>
       <form>
         <div className="form-group">
-          <label htmlFor="formGroupExampleInput">Name</label>
+          <label htmlFor="formGroupExampleInput">Room Name</label>
           <input
             type="text"
             className="form-control"
             id="formGroupExampleInput"
-            value={input.name}
-            onChange={e => setInput({ ...input, name: e.target.value })}
+            value={input.roomName}
+            onChange={e => setInput({ ...input, roomName: e.target.value })}
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="formGroupExampleInput2">Email</label>
-          <input
-            type="text"
-            className="form-control"
-            id="formGroupExampleInput2"
-            value={input.email}
-            onChange={e => setInput({ ...input, email: e.target.value })}
-          />
-        </div>
-        
         <div className="form-group">
         <div className="headerSearch">
         <label htmlFor="formGroupExampleInput2">Dates</label>
@@ -156,7 +149,7 @@ const { id } = useParams();
           />
         </div>
 
-        <button onClick={handleSubmit}><Link to={'/'}>Submit</Link></button>
+        <button onClick={handleSubmit} ><Link to={'/'}>Submit</Link></button>
       </form>
     </div>
   );

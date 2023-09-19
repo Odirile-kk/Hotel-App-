@@ -14,7 +14,7 @@ const Sidebar = () => {
   return (
     <div >
       <div id="sidebar-wrapper" style={{height: '100vh', backgroundColor: '#203f5b'}}>
-      <img src={logo} width={100} height={100} style={{backgroundColor: 'gray', borderRadius: '50%'}}/>
+      {/* <img src={logo} width={100} height={100} style={{backgroundColor: 'gray', borderRadius: '50%', marginLeft: '28%'}}/> */}
         <div className="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
        
           Admin Dashboard
@@ -25,7 +25,7 @@ const Sidebar = () => {
           style={{ padding: "10%", paddingTop: "30%" }}
         >
           <Link
-            to="/adminpanel"
+            to="/"
             className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
           >
             <FaHome /> Home
