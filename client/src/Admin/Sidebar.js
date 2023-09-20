@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FaBed,
   FaPaperclip,
@@ -8,9 +8,21 @@ import {
   FaUser,
 } from "react-icons/fa";
 import logo from "../assets/deluxesmall.png"
+import { clearAccessToken } from "../Redux/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const Sidebar = () => {
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    dispatch(clearAccessToken());
+    console.log("clearing the token");
+    navigate('/')
+  };
+
   return (
     <div >
       <div id="sidebar-wrapper" style={{height: '100vh', backgroundColor: '#203f5b'}}>
@@ -50,8 +62,9 @@ const Sidebar = () => {
           </Link>
 
           <Link
-            to={"/adminLogout"}
+            to={"/"}
             className="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
+            onClick={handleLogout}
           >
             <FaPowerOff /> Logout
           </Link>
